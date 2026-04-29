@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IM Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="current-user-card">
+            <div id="current-user-avatar" class="avatar large-avatar"></div>
+            <div class="current-user-meta">
+              <div id="current-user-name" class="current-user-name"></div>
+              <div class="current-user-row">
+                <span id="current-user-status" class="status-text"></span>
+                <select id="viewer-select" aria-label="切换账号"></select>
+              </div>
+            </div>
+          </div>
+          <label class="search-wrap" for="conversation-search">
+            <input id="conversation-search" type="search" placeholder="搜索联系人或消息" />
+          </label>
+        </div>
+
+        <div id="conversation-list" class="conversation-list"></div>
+
+        <div class="sidebar-bottom">
+          <button id="clear-button" type="button" class="clear-button">清空当前内存消息</button>
+        </div>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="chat-header">
+          <div class="chat-header-main">
+            <div id="chat-avatar" class="avatar"></div>
+            <div>
+              <div class="chat-title-row">
+                <h2 id="chat-title">对话</h2>
+                <button id="pin-button" type="button" class="pin-button">置顶</button>
+              </div>
+              <p id="chat-subtitle" class="hint"></p>
+            </div>
+          </div>
+          <label class="message-search-wrap" for="message-search">
+            <input id="message-search" type="search" placeholder="搜索当前会话消息" />
+          </label>
+        </header>
+
+        <section id="message-list" class="message-list"></section>
+
+        <div id="message-menu" class="message-menu hidden">
+          <button type="button" class="message-menu-item" data-action="reply">回复</button>
+          <button type="button" class="message-menu-item" data-action="copy">复制</button>
+          <button type="button" class="message-menu-item" data-action="delete">删除</button>
+          <button type="button" class="message-menu-item" data-action="recall">撤回</button>
+        </div>
+
+        <div class="composer-tools">
+          <button type="button" class="emoji-button" data-emoji=":)">:)</button>
+          <button type="button" class="emoji-button" data-emoji="👍">👍</button>
+          <button type="button" class="emoji-button" data-emoji="🎯">🎯</button>
+          <button type="button" class="emoji-button" data-emoji="🚀">🚀</button>
+          <button type="button" class="emoji-button" data-emoji="✅">✅</button>
+          <span class="composer-tip">Enter 发送，Shift + Enter 换行</span>
+        </div>
+
+        <div id="reply-banner" class="reply-banner hidden">
+          <div class="reply-banner-text">
+            <strong id="reply-banner-name"></strong>
+            <span id="reply-banner-content"></span>
+          </div>
+          <button id="cancel-reply-button" type="button" class="reply-banner-close">取消</button>
+        </div>
+
+        <form id="composer" class="composer">
+          <textarea
+            id="message-input"
+            rows="3"
+            placeholder="输入消息"
+          ></textarea>
+          <button id="send-button" type="submit">发送</button>
+        </form>
+      </main>
+    </div>
+
+    <template id="conversation-template">
+      <button class="conversation-item" type="button">
+        <div class="avatar"></div>
+        <div class="conversation-content">
+          <div class="conversation-top">
+            <span class="conversation-name"></span>
+            <span class="conversation-meta">
+              <span class="conversation-pin">置顶</span>
+              <span class="conversation-time"></span>
+            </span>
+          </div>
+          <div class="conversation-bottom">
+            <div class="conversation-preview"></div>
+            <span class="conversation-badge"></span>
+          </div>
+        </div>
+      </button>
+    </template>
+
+    <template id="time-divider-template">
+      <div class="time-divider">
+        <span></span>
+      </div>
+    </template>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="avatar"></div>
+        <div class="message-stack">
+          <div class="message-meta">
+            <span class="message-sender"></span>
+            <span class="message-time"></span>
+          </div>
+          <div class="reply-quote hidden">
+            <span class="reply-quote-name"></span>
+            <span class="reply-quote-content"></span>
+          </div>
+          <div class="message-body"></div>
+          <div class="message-status"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

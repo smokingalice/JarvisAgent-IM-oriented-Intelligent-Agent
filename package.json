@@ -1,0 +1,10 @@
+{
+  "name": "agent-pilot-im-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A runnable IM demo based on the Agent-Pilot markdown docs.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
