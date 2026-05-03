@@ -3,132 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IM Demo</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <title>Agent-Pilot | AI 协同办公</title>
+    <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
     <div class="app">
-      <aside class="sidebar">
-        <div class="sidebar-top">
-          <div class="current-user-card">
-            <div id="current-user-avatar" class="avatar large-avatar"></div>
-            <div class="current-user-meta">
-              <div id="current-user-name" class="current-user-name"></div>
-              <div class="current-user-row">
-                <span id="current-user-status" class="status-text"></span>
-                <select id="viewer-select" aria-label="切换账号"></select>
-              </div>
-            </div>
+      <!-- Navigation -->
+      <nav class="nav-bar">
+        <div class="nav-brand">🤖 Agent-Pilot</div>
+        <div class="nav-tabs">
+          <button class="nav-tab active" data-view="im">💬 IM</button>
+          <button class="nav-tab" data-view="documents">📄 文档</button>
+          <button class="nav-tab" data-view="slides">📊 演示稿</button>
+        </div>
+        <div class="nav-user">
+          <select id="viewer-select" aria-label="切换账号"></select>
+        </div>
+      </nav>
+
+      <!-- IM View -->
+      <div id="view-im" class="view active">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <input id="conversation-search" type="search" placeholder="搜索会话" />
           </div>
-          <label class="search-wrap" for="conversation-search">
-            <input id="conversation-search" type="search" placeholder="搜索联系人或消息" />
-          </label>
-        </div>
+          <div id="conversation-list" class="conversation-list"></div>
+        </aside>
 
-        <div id="conversation-list" class="conversation-list"></div>
-
-        <div class="sidebar-bottom">
-          <button id="clear-button" type="button" class="clear-button">清空当前内存消息</button>
-        </div>
-      </aside>
-
-      <main class="chat-panel">
-        <header class="chat-header">
-          <div class="chat-header-main">
+        <main class="chat-panel">
+          <header class="chat-header">
             <div id="chat-avatar" class="avatar"></div>
             <div>
-              <div class="chat-title-row">
-                <h2 id="chat-title">对话</h2>
-                <button id="pin-button" type="button" class="pin-button">置顶</button>
-              </div>
+              <h2 id="chat-title">选择一个会话</h2>
               <p id="chat-subtitle" class="hint"></p>
             </div>
+          </header>
+
+          <section id="message-list" class="message-list">
+            <div class="empty-state">选择左侧会话开始聊天</div>
+          </section>
+
+          <form id="composer" class="composer">
+            <textarea id="message-input" rows="2" placeholder="输入消息... (输入指令如「帮我写一份产品方案」触发 Agent)"></textarea>
+            <button id="send-button" type="submit">发送</button>
+          </form>
+        </main>
+      </div>
+
+      <!-- Documents View -->
+      <div id="view-documents" class="view">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <h3>📄 文档列表</h3>
           </div>
-          <label class="message-search-wrap" for="message-search">
-            <input id="message-search" type="search" placeholder="搜索当前会话消息" />
-          </label>
-        </header>
-
-        <section id="message-list" class="message-list"></section>
-
-        <div id="message-menu" class="message-menu hidden">
-          <button type="button" class="message-menu-item" data-action="reply">回复</button>
-          <button type="button" class="message-menu-item" data-action="copy">复制</button>
-          <button type="button" class="message-menu-item" data-action="delete">删除</button>
-          <button type="button" class="message-menu-item" data-action="recall">撤回</button>
-        </div>
-
-        <div class="composer-tools">
-          <button type="button" class="emoji-button" data-emoji=":)">:)</button>
-          <button type="button" class="emoji-button" data-emoji="👍">👍</button>
-          <button type="button" class="emoji-button" data-emoji="🎯">🎯</button>
-          <button type="button" class="emoji-button" data-emoji="🚀">🚀</button>
-          <button type="button" class="emoji-button" data-emoji="✅">✅</button>
-          <span class="composer-tip">Enter 发送，Shift + Enter 换行</span>
-        </div>
-
-        <div id="reply-banner" class="reply-banner hidden">
-          <div class="reply-banner-text">
-            <strong id="reply-banner-name"></strong>
-            <span id="reply-banner-content"></span>
+          <div id="document-list" class="document-list"></div>
+        </aside>
+        <main class="doc-panel">
+          <div id="doc-content" class="doc-content">
+            <div class="empty-state">选择左侧文档查看内容，或在 IM 中让 Agent 生成新文档</div>
           </div>
-          <button id="cancel-reply-button" type="button" class="reply-banner-close">取消</button>
-        </div>
+        </main>
+      </div>
 
-        <form id="composer" class="composer">
-          <textarea
-            id="message-input"
-            rows="3"
-            placeholder="输入消息"
-          ></textarea>
-          <button id="send-button" type="submit">发送</button>
-        </form>
-      </main>
+      <!-- Slides View -->
+      <div id="view-slides" class="view">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <h3>📊 演示稿列表</h3>
+          </div>
+          <div id="slides-list" class="slides-list"></div>
+        </aside>
+        <main class="slides-panel">
+          <div id="slides-content" class="slides-content">
+            <div class="empty-state">选择左侧演示稿查看，或在 IM 中让 Agent 生成</div>
+          </div>
+        </main>
+      </div>
     </div>
 
-    <template id="conversation-template">
-      <button class="conversation-item" type="button">
-        <div class="avatar"></div>
-        <div class="conversation-content">
-          <div class="conversation-top">
-            <span class="conversation-name"></span>
-            <span class="conversation-meta">
-              <span class="conversation-pin">置顶</span>
-              <span class="conversation-time"></span>
-            </span>
-          </div>
-          <div class="conversation-bottom">
-            <div class="conversation-preview"></div>
-            <span class="conversation-badge"></span>
-          </div>
-        </div>
-      </button>
-    </template>
-
-    <template id="time-divider-template">
-      <div class="time-divider">
-        <span></span>
-      </div>
-    </template>
-
-    <template id="message-template">
-      <article class="message">
-        <div class="avatar"></div>
-        <div class="message-stack">
-          <div class="message-meta">
-            <span class="message-sender"></span>
-            <span class="message-time"></span>
-          </div>
-          <div class="reply-quote hidden">
-            <span class="reply-quote-name"></span>
-            <span class="reply-quote-content"></span>
-          </div>
-          <div class="message-body"></div>
-          <div class="message-status"></div>
-        </div>
-      </article>
-    </template>
-
-    <script src="/app.js" type="module"></script>
+    <script src="/static/app.js"></script>
   </body>
 </html>

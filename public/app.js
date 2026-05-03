@@ -1,623 +1,479 @@
+const API_BASE = '';
+const WS_BASE = `ws://${location.host}`;
+
 const state = {
-  users: [],
-  currentUser: null,
-  activeChatUser: null,
-  conversations: [],
+  currentUser: 'alice',
+  activeChat: null,
+  chats: [],
   messages: [],
-  conversationQuery: "",
-  messageQuery: "",
-  replyToId: null,
-  menuMessageId: null,
+  documents: [],
+  presentations: [],
+  ws: null,
 };
 
-const viewerSelect = document.querySelector("#viewer-select");
-const currentUserAvatar = document.querySelector("#current-user-avatar");
-const currentUserName = document.querySelector("#current-user-name");
-const currentUserStatus = document.querySelector("#current-user-status");
-const conversationSearch = document.querySelector("#conversation-search");
-const conversationList = document.querySelector("#conversation-list");
-const chatTitle = document.querySelector("#chat-title");
-const chatSubtitle = document.querySelector("#chat-subtitle");
-const chatAvatar = document.querySelector("#chat-avatar");
-const pinButton = document.querySelector("#pin-button");
-const messageSearch = document.querySelector("#message-search");
-const messageList = document.querySelector("#message-list");
-const messageMenu = document.querySelector("#message-menu");
-const composer = document.querySelector("#composer");
-const messageInput = document.querySelector("#message-input");
-const clearButton = document.querySelector("#clear-button");
-const emojiButtons = document.querySelectorAll(".emoji-button");
-const replyBanner = document.querySelector("#reply-banner");
-const replyBannerName = document.querySelector("#reply-banner-name");
-const replyBannerContent = document.querySelector("#reply-banner-content");
-const cancelReplyButton = document.querySelector("#cancel-reply-button");
-const conversationTemplate = document.querySelector("#conversation-template");
-const timeDividerTemplate = document.querySelector("#time-divider-template");
-const messageTemplate = document.querySelector("#message-template");
+// ==================== Init ====================
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initUserSelect();
+  initComposer();
+  connectWebSocket();
+  loadChats();
+  loadDocuments();
+  loadPresentations();
+});
 
-init();
-
-async function init() {
-  bindEvents();
-  connectEvents();
-  await refresh();
-}
-
-function bindEvents() {
-  messageInput.addEventListener("keydown", async (event) => {
-    if (event.key !== "Enter" || event.shiftKey) {
-      return;
-    }
-
-    event.preventDefault();
-    await sendCurrentMessage();
-  });
-
-  messageInput.addEventListener("input", () => {
-    saveDraft(messageInput.value);
-  });
-
-  viewerSelect.addEventListener("change", async () => {
-    const nextViewerId = viewerSelect.value;
-    const nextTargetId = firstAvailableChat(nextViewerId);
-    clearReply();
-    await refresh(nextViewerId, nextTargetId);
-  });
-
-  conversationSearch.addEventListener("input", () => {
-    state.conversationQuery = conversationSearch.value.trim().toLowerCase();
-    renderConversations();
-  });
-
-  messageSearch.addEventListener("input", () => {
-    state.messageQuery = messageSearch.value.trim().toLowerCase();
-    renderMessages();
-  });
-
-  pinButton.addEventListener("click", async () => {
-    await fetch("/api/conversations/pin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        viewerId: state.currentUser.id,
-        targetId: state.activeChatUser.id,
-        pinned: !activeConversation()?.pinned,
-      }),
-    });
-
-    await refresh(state.currentUser.id, state.activeChatUser.id);
-  });
-
-  clearButton.addEventListener("click", async () => {
-    await fetch("/api/messages", { method: "DELETE" });
-    clearDeletedSet();
-    clearReply();
-    hideMessageMenu();
-    await refresh(state.currentUser.id, state.activeChatUser.id);
-  });
-
-  cancelReplyButton.addEventListener("click", () => {
-    clearReply();
-  });
-
-  composer.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    await sendCurrentMessage();
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest("#message-menu")) {
-      hideMessageMenu();
-    }
-  });
-
-  document.addEventListener("scroll", () => {
-    hideMessageMenu();
-  }, true);
-
-  window.addEventListener("resize", () => {
-    hideMessageMenu();
-  });
-
-  messageMenu.addEventListener("click", async (event) => {
-    const button = event.target.closest(".message-menu-item");
-    if (!button || !state.menuMessageId) {
-      return;
-    }
-
-    const message = findMessage(state.menuMessageId);
-    hideMessageMenu();
-    if (!message) {
-      return;
-    }
-
-    await handleMessageAction(button.dataset.action, message);
-  });
-
-  emojiButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const emoji = button.dataset.emoji || "";
-      const prefix = messageInput.value && !messageInput.value.endsWith(" ") ? " " : "";
-      messageInput.value += `${prefix}${emoji}`;
-      saveDraft(messageInput.value);
-      messageInput.focus();
+// ==================== Navigation ====================
+function initNav() {
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(`view-${tab.dataset.view}`).classList.add('active');
     });
   });
 }
 
-function connectEvents() {
-  const stream = new EventSource("/api/events");
-  const refreshCurrent = async () => {
-    await refresh(state.currentUser?.id, state.activeChatUser?.id);
+function initUserSelect() {
+  const select = document.getElementById('viewer-select');
+  const users = ['alice', 'bob', 'charlie', 'diana'];
+  users.forEach(u => {
+    const opt = document.createElement('option');
+    opt.value = u;
+    opt.textContent = u.charAt(0).toUpperCase() + u.slice(1);
+    select.appendChild(opt);
+  });
+  select.value = state.currentUser;
+  select.addEventListener('change', e => {
+    state.currentUser = e.target.value;
+    loadChats();
+  });
+}
+
+// ==================== WebSocket ====================
+function connectWebSocket() {
+  state.ws = new WebSocket(`${WS_BASE}/ws`);
+  state.ws.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    handleWsMessage(msg);
   };
-
-  stream.addEventListener("message", refreshCurrent);
-  stream.addEventListener("reset", refreshCurrent);
-  stream.addEventListener("message-status", refreshCurrent);
-  stream.addEventListener("conversation-updated", refreshCurrent);
-  stream.addEventListener("message-recalled", refreshCurrent);
+  state.ws.onclose = () => {
+    setTimeout(connectWebSocket, 2000);
+  };
 }
 
-async function refresh(viewerId = state.currentUser?.id, targetId = state.activeChatUser?.id) {
-  const query = new URLSearchParams();
-  if (viewerId) query.set("viewerId", viewerId);
-  if (targetId) query.set("targetId", targetId);
-
-  const response = await fetch(`/api/bootstrap?${query.toString()}`);
-  const data = await response.json();
-
-  state.users = data.users;
-  state.currentUser = data.currentUser;
-  state.activeChatUser = data.activeChatUser;
-  state.conversations = data.conversations;
-  state.messages = data.messages;
-
-  if (state.replyToId && !state.messages.find((message) => message.id === state.replyToId)) {
-    clearReply();
+function handleWsMessage(msg) {
+  switch (msg.type) {
+    case 'new_message':
+      handleNewMessage(msg.data);
+      break;
+    case 'task_progress':
+      handleTaskProgress(msg.data);
+      break;
+    case 'task_update':
+      break;
+    case 'document_updated':
+      loadDocuments();
+      break;
+    case 'presentation_updated':
+      loadPresentations();
+      break;
   }
-
-  render();
 }
 
-async function sendCurrentMessage() {
-  const text = messageInput.value.trim();
-  if (!text) {
-    return;
+function handleNewMessage(message) {
+  if (message.chat_id === state.activeChat) {
+    state.messages.push(message);
+    renderMessages();
+    scrollToBottom();
   }
-
-  await fetch("/api/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      senderId: state.currentUser.id,
-      receiverId: state.activeChatUser.id,
-      text,
-      replyToId: state.replyToId,
-    }),
-  });
-
-  messageInput.value = "";
-  saveDraft("");
-  clearReply();
-  await refresh(state.currentUser.id, state.activeChatUser.id);
+  loadChats();
 }
 
-function render() {
-  renderCurrentUser();
-  renderConversations();
-  renderHeader();
-  renderReplyBanner();
-  renderMessages();
-  restoreDraft();
-}
-
-function renderCurrentUser() {
-  viewerSelect.innerHTML = "";
-
-  state.users.forEach((user) => {
-    const option = document.createElement("option");
-    option.value = user.id;
-    option.textContent = user.name;
-    option.selected = user.id === state.currentUser.id;
-    viewerSelect.appendChild(option);
-  });
-
-  currentUserAvatar.textContent = initials(state.currentUser.name);
-  currentUserName.textContent = state.currentUser.name;
-  currentUserStatus.textContent = state.currentUser.status;
-}
-
-function renderConversations() {
-  conversationList.innerHTML = "";
-
-  const filtered = state.conversations.filter((conversation) => {
-    if (!state.conversationQuery) {
-      return true;
-    }
-
-    const haystack = [conversation.name, conversation.status, buildPreview(conversation)]
-      .join(" ")
-      .toLowerCase();
-    return haystack.includes(state.conversationQuery);
-  });
-
-  if (!filtered.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty-state";
-    empty.textContent = "没有匹配的联系人或消息。";
-    conversationList.appendChild(empty);
-    return;
+function handleTaskProgress(data) {
+  const progressEl = document.getElementById(`progress-${data.task_id}`);
+  if (progressEl) {
+    progressEl.style.width = `${data.progress}%`;
   }
+}
 
-  filtered.forEach((conversation) => {
-    const item = conversationTemplate.content.firstElementChild.cloneNode(true);
-    item.querySelector(".avatar").textContent = initials(conversation.name);
-    item.querySelector(".conversation-name").textContent = conversation.name;
-    item.querySelector(".conversation-time").textContent = conversation.lastMessage
-      ? formatConversationTime(conversation.lastMessage.createdAt)
-      : "";
-    item.querySelector(".conversation-preview").textContent = buildPreview(conversation);
+// ==================== IM - Chats ====================
+async function loadChats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/chats?user_id=${state.currentUser}`);
+    state.chats = await res.json();
+    renderChats();
+  } catch (e) {
+    console.error('Failed to load chats:', e);
+  }
+}
 
-    const badge = item.querySelector(".conversation-badge");
-    if (conversation.unreadCount > 0) {
-      badge.textContent = conversation.unreadCount > 99 ? "99+" : String(conversation.unreadCount);
-      badge.classList.add("visible");
-    }
-
-    if (conversation.id === state.activeChatUser.id) {
-      item.classList.add("active");
-    }
-
-    if (conversation.pinned) {
-      item.classList.add("pinned");
-    }
-
-    item.addEventListener("click", async () => {
-      clearReply();
-      await refresh(state.currentUser.id, conversation.id);
-    });
-
-    conversationList.appendChild(item);
+function renderChats() {
+  const list = document.getElementById('conversation-list');
+  list.innerHTML = '';
+  state.chats.forEach(chat => {
+    const item = document.createElement('div');
+    item.className = `conversation-item${chat.id === state.activeChat ? ' active' : ''}`;
+    const initial = (chat.name || '?').charAt(0);
+    const isAgent = chat.name === 'Agent-Pilot';
+    const preview = chat.last_message ? chat.last_message.content.slice(0, 30) : '';
+    const time = chat.last_message ? formatTime(chat.last_message.created_at) : '';
+    item.innerHTML = `
+      <div class="avatar${isAgent ? ' agent-avatar' : ''}">${isAgent ? '🤖' : initial}</div>
+      <div class="conv-info">
+        <span class="conv-name">${chat.name || chat.id}</span>
+        <span class="conv-preview">${escapeHtml(preview)}</span>
+      </div>
+      <div class="conv-meta">
+        <span class="conv-time">${time}</span>
+      </div>
+    `;
+    item.addEventListener('click', () => openChat(chat.id, chat.name));
+    list.appendChild(item);
   });
 }
 
-function renderHeader() {
-  chatAvatar.textContent = initials(state.activeChatUser.name);
-  chatTitle.textContent = state.activeChatUser.name;
-  chatSubtitle.textContent = state.activeChatUser.status;
-  pinButton.textContent = activeConversation()?.pinned ? "已置顶" : "置顶";
-  pinButton.classList.toggle("active", Boolean(activeConversation()?.pinned));
+async function openChat(chatId, chatName) {
+  state.activeChat = chatId;
+  document.getElementById('chat-title').textContent = chatName || chatId;
+  document.getElementById('chat-subtitle').textContent = '';
+  renderChats();
+  await loadMessages(chatId);
 }
 
-function renderReplyBanner() {
-  const replyTarget = findMessage(state.replyToId);
-  if (!replyTarget) {
-    replyBanner.classList.add("hidden");
-    return;
+// ==================== IM - Messages ====================
+async function loadMessages(chatId) {
+  try {
+    const res = await fetch(`${API_BASE}/api/chats/${chatId}/messages`);
+    state.messages = await res.json();
+    renderMessages();
+    scrollToBottom();
+  } catch (e) {
+    console.error('Failed to load messages:', e);
   }
-
-  const sender = findUser(replyTarget.senderId);
-  replyBannerName.textContent = `回复 ${sender.name}`;
-  replyBannerContent.textContent = previewText(replyTarget.text);
-  replyBanner.classList.remove("hidden");
 }
 
 function renderMessages() {
-  messageList.innerHTML = "";
-  hideMessageMenu();
-
-  const filteredMessages = visibleMessages().filter((message) => {
-    if (!state.messageQuery) {
-      return true;
-    }
-
-    const replySource = message.replyToId ? findMessage(message.replyToId)?.text || "" : "";
-    return `${message.text} ${replySource}`.toLowerCase().includes(state.messageQuery);
-  });
-
-  if (!filteredMessages.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty-state";
-    empty.textContent = state.messageQuery
-      ? "当前会话里没有匹配的消息。"
-      : "当前两人之间还没有消息，直接发送即可开始通信。";
-    messageList.appendChild(empty);
+  const list = document.getElementById('message-list');
+  list.innerHTML = '';
+  if (state.messages.length === 0) {
+    list.innerHTML = '<div class="empty-state">暂无消息</div>';
     return;
   }
+  state.messages.forEach(msg => {
+    const isSelf = msg.sender_id === state.currentUser;
+    const isAgent = msg.sender_id === 'agent';
+    const div = document.createElement('div');
+    div.className = `message${isSelf ? ' self' : ''}${isAgent ? ' agent' : ''}`;
 
-  filteredMessages.forEach((message, index) => {
-    const previous = filteredMessages[index - 1];
-    if (shouldInsertTimeDivider(previous, message)) {
-      const divider = timeDividerTemplate.content.firstElementChild.cloneNode(true);
-      divider.querySelector("span").textContent = formatTimeline(message.createdAt);
-      messageList.appendChild(divider);
+    const avatarText = isAgent ? '🤖' : msg.sender_id.charAt(0).toUpperCase();
+    const avatarClass = isAgent ? 'avatar agent-avatar' : 'avatar';
+
+    let bodyHtml;
+    if (msg.msg_type === 'agent_card' && msg.card_data) {
+      bodyHtml = renderAgentCard(msg);
+    } else {
+      bodyHtml = `<div class="message-body">${formatMessageContent(msg.content)}</div>`;
     }
 
-    const node = messageTemplate.content.firstElementChild.cloneNode(true);
-    const sender = findUser(message.senderId);
-    node.querySelector(".avatar").textContent = initials(sender.name);
-    node.querySelector(".message-sender").textContent = sender.name;
-    node.querySelector(".message-time").textContent = formatTime(message.createdAt);
-    node.querySelector(".message-body").textContent = message.text;
-    node.querySelector(".message-status").textContent = buildMessageStatus(message);
-
-    if (message.recalledAt) {
-      node.classList.add("recalled");
-    }
-
-    if (state.messageQuery) {
-      node.querySelector(".message-body").classList.add("marked");
-    }
-
-    const quote = node.querySelector(".reply-quote");
-    const replySource = message.replyToId ? findMessage(message.replyToId) : null;
-    if (replySource) {
-      const quoteSender = findUser(replySource.senderId);
-      quote.querySelector(".reply-quote-name").textContent = quoteSender.name;
-      quote.querySelector(".reply-quote-content").textContent = previewText(replySource.text);
-      quote.classList.remove("hidden");
-    }
-
-    if (message.senderId === state.currentUser.id) {
-      node.classList.add("self");
-    }
-
-    node.addEventListener("contextmenu", (event) => {
-      event.preventDefault();
-      openMessageMenu(event.clientX, event.clientY, message);
-    });
-
-    messageList.appendChild(node);
+    div.innerHTML = `
+      <div class="${avatarClass}">${avatarText}</div>
+      <div class="message-content">
+        ${!isSelf ? `<div class="message-sender">${msg.sender_id}</div>` : ''}
+        ${bodyHtml}
+        <div class="message-time">${formatTime(msg.created_at)}</div>
+      </div>
+    `;
+    list.appendChild(div);
   });
-
-  messageList.scrollTop = messageList.scrollHeight;
 }
 
-async function handleMessageAction(action, message) {
-  if (action === "reply") {
-    state.replyToId = message.id;
-    renderReplyBanner();
-    messageInput.focus();
-    return;
+function renderAgentCard(msg) {
+  const card = msg.card_data;
+  if (!card) return `<div class="message-body">${escapeHtml(msg.content)}</div>`;
+
+  let headerIcon = '🤖';
+  let headerTitle = 'Agent-Pilot';
+  let bodyContent = formatMessageContent(msg.content);
+  let extra = '';
+
+  if (card.type === 'plan') {
+    headerIcon = '📋';
+    headerTitle = '执行计划';
+  } else if (card.type === 'delivery') {
+    headerIcon = '✅';
+    headerTitle = '任务完成';
+    if (card.results && card.results.artifacts) {
+      extra = card.results.artifacts.map(art => {
+        const viewName = art.type === 'document' ? '文档' : '演示稿';
+        return `<span class="artifact-link" onclick="viewArtifact('${art.type}','${art.id}')"">查看${viewName}: ${art.title}</span>`;
+      }).join(' ');
+    }
+  } else if (card.type === 'clarification') {
+    headerIcon = '❓';
+    headerTitle = '需要确认';
   }
 
-  if (action === "copy") {
-    await copyText(message.text);
-    return;
+  let progressHtml = '';
+  if (card.task_id && card.type === 'plan') {
+    progressHtml = `<div class="progress-bar"><div class="progress-fill" id="progress-${card.task_id}" style="width: 0%"></div></div>`;
   }
 
-  if (action === "delete") {
-    hideMessageForCurrentUser(message.id);
-    renderMessages();
-    return;
-  }
+  return `
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <span class="icon">${headerIcon}</span>
+        <span class="title">${headerTitle}</span>
+      </div>
+      <div class="agent-card-body">${bodyContent}</div>
+      ${extra}
+      ${progressHtml}
+    </div>
+  `;
+}
 
-  if (action === "recall") {
-    const response = await fetch("/api/messages/recall", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        viewerId: state.currentUser.id,
-        messageId: message.id,
-      }),
+function viewArtifact(type, id) {
+  if (type === 'document') {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelector('[data-view="documents"]').classList.add('active');
+    document.getElementById('view-documents').classList.add('active');
+    loadDocumentContent(id);
+  } else if (type === 'presentation') {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelector('[data-view="slides"]').classList.add('active');
+    document.getElementById('view-slides').classList.add('active');
+    loadSlidesContent(id);
+  }
+}
+
+// ==================== Composer ====================
+function initComposer() {
+  const form = document.getElementById('composer');
+  const input = document.getElementById('message-input');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const content = input.value.trim();
+    if (!content || !state.activeChat) return;
+    input.value = '';
+    await sendMessage(content);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+}
+
+async function sendMessage(content) {
+  try {
+    await fetch(`${API_BASE}/api/chats/${state.activeChat}/messages?user_id=${state.currentUser}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content, msg_type: 'text' }),
     });
 
-    if (!response.ok) {
-      window.alert("这条消息当前不能撤回。");
+    const isAgentChat = state.chats.find(c => c.id === state.activeChat)?.name === 'Agent-Pilot';
+    const hasCommand = /帮我|生成|创建|写一|做一|总结|整理/.test(content);
+    if (isAgentChat || hasCommand) {
+      await fetch(`${API_BASE}/api/agent/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: content,
+          chat_id: state.activeChat,
+          user_id: state.currentUser,
+        }),
+      });
+    }
+  } catch (e) {
+    console.error('Failed to send message:', e);
+  }
+}
+
+// ==================== Documents ====================
+async function loadDocuments() {
+  try {
+    const res = await fetch(`${API_BASE}/api/documents`);
+    state.documents = await res.json();
+    renderDocumentList();
+  } catch (e) {
+    console.error('Failed to load documents:', e);
+  }
+}
+
+function renderDocumentList() {
+  const list = document.getElementById('document-list');
+  list.innerHTML = '';
+  if (state.documents.length === 0) {
+    list.innerHTML = '<div style="padding:20px;color:var(--text-secondary);font-size:13px;">暂无文档。在 IM 中对 Agent 说「帮我写一份...」即可生成。</div>';
+    return;
+  }
+  state.documents.forEach(doc => {
+    const item = document.createElement('div');
+    item.className = 'doc-item';
+    item.innerHTML = `
+      <div class="avatar" style="background:#6366f1;">📄</div>
+      <div class="conv-info">
+        <span class="conv-name">${escapeHtml(doc.title)}</span>
+        <span class="conv-preview">${doc.status} · ${formatTime(doc.updated_at)}</span>
+      </div>
+    `;
+    item.addEventListener('click', () => loadDocumentContent(doc.id));
+    list.appendChild(item);
+  });
+}
+
+async function loadDocumentContent(docId) {
+  try {
+    const res = await fetch(`${API_BASE}/api/documents/${docId}`);
+    const doc = await res.json();
+    const container = document.getElementById('doc-content');
+    container.innerHTML = renderMarkdown(doc.content || `# ${doc.title}\n\n文档内容加载中...`);
+
+    document.querySelectorAll('.doc-item').forEach(el => el.classList.remove('active'));
+  } catch (e) {
+    console.error('Failed to load document:', e);
+  }
+}
+
+// ==================== Presentations ====================
+async function loadPresentations() {
+  try {
+    const res = await fetch(`${API_BASE}/api/presentations`);
+    state.presentations = await res.json();
+    renderSlidesList();
+  } catch (e) {
+    console.error('Failed to load presentations:', e);
+  }
+}
+
+function renderSlidesList() {
+  const list = document.getElementById('slides-list');
+  list.innerHTML = '';
+  if (state.presentations.length === 0) {
+    list.innerHTML = '<div style="padding:20px;color:var(--text-secondary);font-size:13px;">暂无演示稿。在 IM 中对 Agent 说「帮我做一个PPT」即可生成。</div>';
+    return;
+  }
+  state.presentations.forEach(pres => {
+    const slides = typeof pres.slides === 'string' ? JSON.parse(pres.slides) : (pres.slides || []);
+    const item = document.createElement('div');
+    item.className = 'slides-item';
+    item.innerHTML = `
+      <div class="avatar" style="background:#8b5cf6;">📊</div>
+      <div class="conv-info">
+        <span class="conv-name">${escapeHtml(pres.title)}</span>
+        <span class="conv-preview">${slides.length} 页 · ${formatTime(pres.updated_at)}</span>
+      </div>
+    `;
+    item.addEventListener('click', () => loadSlidesContent(pres.id));
+    list.appendChild(item);
+  });
+}
+
+async function loadSlidesContent(presId) {
+  try {
+    const res = await fetch(`${API_BASE}/api/presentations/${presId}`);
+    const pres = await res.json();
+    const slides = typeof pres.slides === 'string' ? JSON.parse(pres.slides) : (pres.slides || []);
+    const container = document.getElementById('slides-content');
+    container.innerHTML = '';
+
+    if (slides.length === 0) {
+      container.innerHTML = '<div class="empty-state">演示稿暂无内容</div>';
       return;
     }
 
-    if (state.replyToId === message.id) {
-      clearReply();
-    }
-
-    await refresh(state.currentUser.id, state.activeChatUser.id);
+    slides.forEach((slide, idx) => {
+      const el = document.createElement('div');
+      el.className = `slide layout-${slide.layout}`;
+      el.innerHTML = renderSlide(slide, idx + 1, slides.length);
+      container.appendChild(el);
+    });
+  } catch (e) {
+    console.error('Failed to load slides:', e);
   }
 }
 
-function openMessageMenu(x, y, message) {
-  state.menuMessageId = message.id;
+function renderSlide(slide, num, total) {
+  const d = slide.data || {};
+  const numHtml = `<div class="slide-number">${num} / ${total}</div>`;
 
-  const recallItem = messageMenu.querySelector('[data-action="recall"]');
-  recallItem.classList.toggle("hidden", !canRecall(message));
-
-  messageMenu.classList.remove("hidden");
-  messageMenu.style.left = "0px";
-  messageMenu.style.top = "0px";
-
-  const menuRect = messageMenu.getBoundingClientRect();
-  const maxLeft = window.innerWidth - menuRect.width - 8;
-  const maxTop = window.innerHeight - menuRect.height - 8;
-  const left = Math.max(8, Math.min(x, maxLeft));
-  const top = Math.max(8, Math.min(y, maxTop));
-
-  messageMenu.style.left = `${left}px`;
-  messageMenu.style.top = `${top}px`;
-}
-
-function hideMessageMenu() {
-  state.menuMessageId = null;
-  messageMenu.classList.add("hidden");
-}
-
-function visibleMessages() {
-  const hidden = hiddenMessageIds();
-  return state.messages.filter((message) => !hidden.has(message.id));
-}
-
-function hiddenMessageIds() {
-  try {
-    const raw = window.localStorage.getItem(hiddenKey());
-    const parsed = raw ? JSON.parse(raw) : [];
-    return new Set(Array.isArray(parsed) ? parsed : []);
-  } catch {
-    return new Set();
+  switch (slide.layout) {
+    case 'title':
+      return `<h1>${escapeHtml(d.title || '')}</h1><p>${escapeHtml(d.subtitle || '')}</p>${numHtml}`;
+    case 'content':
+      const points = (d.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+      return `<h2>${escapeHtml(d.title || '')}</h2><ul>${points}</ul>${numHtml}`;
+    case 'two_column':
+      const lp = (d.left_points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+      const rp = (d.right_points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+      return `
+        <h2>${escapeHtml(d.title || '')}</h2>
+        <div class="columns">
+          <div class="column"><h3>${escapeHtml(d.left_title || '左栏')}</h3><ul>${lp}</ul></div>
+          <div class="column"><h3>${escapeHtml(d.right_title || '右栏')}</h3><ul>${rp}</ul></div>
+        </div>${numHtml}`;
+    case 'summary':
+      const sp = (d.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+      return `<h2>${escapeHtml(d.title || '')}</h2><ul>${sp}</ul>${numHtml}`;
+    case 'image_text':
+      return `<h2>${escapeHtml(d.title || '')}</h2><p>${escapeHtml(d.text || '')}</p>${numHtml}`;
+    default:
+      return `<h2>${escapeHtml(d.title || '幻灯片')}</h2><p>${JSON.stringify(d)}</p>${numHtml}`;
   }
 }
 
-function hideMessageForCurrentUser(messageId) {
-  const hidden = hiddenMessageIds();
-  hidden.add(messageId);
-  window.localStorage.setItem(hiddenKey(), JSON.stringify([...hidden]));
-}
-
-function clearDeletedSet() {
-  if (!state.currentUser || !state.activeChatUser) {
-    return;
-  }
-
-  window.localStorage.removeItem(hiddenKey());
-}
-
-function hiddenKey() {
-  return `im-hidden:${state.currentUser.id}:${state.activeChatUser.id}`;
-}
-
-function clearReply() {
-  state.replyToId = null;
-  replyBanner.classList.add("hidden");
-}
-
-function shouldInsertTimeDivider(previous, current) {
-  if (!previous) {
-    return true;
-  }
-
-  const diff = Math.abs(Date.parse(current.createdAt) - Date.parse(previous.createdAt));
-  return diff > 1000 * 60 * 5;
-}
-
-function buildMessageStatus(message) {
-  if (message.senderId !== state.currentUser.id) {
-    return "";
-  }
-
-  if (message.recalledAt) {
-    return "已撤回";
-  }
-
-  if (message.readAt) {
-    return "已读";
-  }
-
-  if (message.deliveredAt) {
-    return "已送达";
-  }
-
-  return "发送中";
-}
-
-function canRecall(message) {
-  if (message.senderId !== state.currentUser.id || message.recalledAt) {
-    return false;
-  }
-
-  return Date.now() - Date.parse(message.createdAt) <= 1000 * 60 * 2;
-}
-
-function firstAvailableChat(viewerId) {
-  const candidate = state.users.find((user) => user.id !== viewerId);
-  return candidate ? candidate.id : "";
-}
-
-function findUser(userId) {
-  return state.users.find((user) => user.id === userId);
-}
-
-function findMessage(messageId) {
-  return state.messages.find((message) => message.id === messageId) || null;
-}
-
-function activeConversation() {
-  return state.conversations.find((conversation) => conversation.id === state.activeChatUser.id);
-}
-
-function buildPreview(conversation) {
-  if (!conversation.lastMessage) {
-    return conversation.status;
-  }
-
-  if (conversation.lastMessage.recalledAt) {
-    return conversation.lastMessage.senderId === state.currentUser.id
-      ? "你撤回了一条消息"
-      : `${conversation.name} 撤回了一条消息`;
-  }
-
-  const sender = conversation.lastMessage.senderId === state.currentUser.id ? "你" : conversation.name;
-  return `${sender}: ${conversation.lastMessage.text}`;
-}
-
-function formatTime(isoString) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(isoString));
-}
-
-function formatConversationTime(isoString) {
-  const date = new Date(isoString);
+// ==================== Utilities ====================
+function formatTime(isoStr) {
+  if (!isoStr) return '';
+  const d = new Date(isoStr);
   const now = new Date();
-  const sameDay = date.toDateString() === now.toDateString();
-  if (sameDay) {
-    return formatTime(isoString);
+  if (d.toDateString() === now.toDateString()) {
+    return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
   }
-
-  return new Intl.DateTimeFormat("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-  }).format(date);
+  return d.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
 }
 
-function formatTimeline(isoString) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(isoString));
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function initials(name) {
-  return name.slice(0, 1).toUpperCase();
+function formatMessageContent(content) {
+  if (!content) return '';
+  let html = escapeHtml(content);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\n/g, '<br>');
+  return html;
 }
 
-function previewText(text) {
-  return text.length > 36 ? `${text.slice(0, 36)}...` : text;
+function renderMarkdown(md) {
+  if (!md) return '';
+  let html = escapeHtml(md);
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+  html = html.replace(/<\/ul>\s*<ul>/g, '');
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
+  html = `<p>${html}</p>`;
+  html = html.replace(/<p><h([123])>/g, '<h$1>');
+  html = html.replace(/<\/h([123])><\/p>/g, '</h$1>');
+  html = html.replace(/<p><ul>/g, '<ul>');
+  html = html.replace(/<\/ul><\/p>/g, '</ul>');
+  return html;
 }
 
-function draftKey() {
-  return `im-draft:${state.currentUser.id}:${state.activeChatUser.id}`;
-}
-
-function saveDraft(value) {
-  if (!state.currentUser || !state.activeChatUser) {
-    return;
-  }
-
-  window.localStorage.setItem(draftKey(), value);
-}
-
-function restoreDraft() {
-  if (!state.currentUser || !state.activeChatUser) {
-    return;
-  }
-
-  const draft = window.localStorage.getItem(draftKey()) || "";
-  if (messageInput.value !== draft) {
-    messageInput.value = draft;
-  }
-}
-
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch {
-    window.prompt("复制下面的内容", text);
-  }
+function scrollToBottom() {
+  const list = document.getElementById('message-list');
+  setTimeout(() => { list.scrollTop = list.scrollHeight; }, 50);
 }
