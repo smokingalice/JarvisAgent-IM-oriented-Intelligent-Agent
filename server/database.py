@@ -3,7 +3,7 @@ import os
 import json
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "data", "agent_pilot.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "data", "jarvis_agent.db")
 
 
 async def get_db():
@@ -103,14 +103,14 @@ async def _seed_data(db):
         ("bob", "Bob", "", "online"),
         ("charlie", "Charlie", "", "busy"),
         ("diana", "Diana", "", "online"),
-        ("agent", "Agent-Pilot", "", "online"),
+        ("agent", "JarvisAgent", "", "online"),
     ]
     await db.executemany(
         "INSERT INTO users (id, name, avatar, status) VALUES (?, ?, ?, ?)", users
     )
 
     chats = [
-        ("chat_alice_agent", "private", "Agent-Pilot"),
+        ("chat_alice_agent", "private", "JarvisAgent"),
         ("chat_alice_bob", "private", "Bob"),
         ("chat_alice_charlie", "private", "Charlie"),
         ("chat_alice_diana", "private", "Diana"),
@@ -141,7 +141,7 @@ async def _seed_data(db):
         ("msg_seed_2", "chat_alice_bob", "alice", "好，我等下把输入区和会话列表再 polish 一下。", "text", now),
         ("msg_seed_3", "chat_alice_charlie", "charlie", "明早我们可以一起过一下演示流程。", "text", now),
         ("msg_seed_4", "chat_alice_diana", "diana", "UI 这版已经比之前更像 IM 了。", "text", now),
-        ("msg_seed_5", "chat_alice_agent", "agent", "你好！我是 Agent-Pilot，你的 AI 协同助手。\n\n你可以在这里给我发指令，比如：\n- \"帮我写一份产品方案\"\n- \"把上次讨论整理成文档\"\n- \"做一个10页的项目汇报PPT\"\n\n有什么我可以帮你的？", "text", now),
+        ("msg_seed_5", "chat_alice_agent", "agent", "你好！我是 JarvisAgent，你的 AI 协同助手。\n\n你可以在这里给我发指令，比如：\n- \"帮我写一份产品方案\"\n- \"把上次讨论整理成文档\"\n- \"做一个10页的项目汇报PPT\"\n\n有什么我可以帮你的？", "text", now),
     ]
     await db.executemany(
         "INSERT INTO messages (id, chat_id, sender_id, content, msg_type, created_at) VALUES (?, ?, ?, ?, ?, ?)",

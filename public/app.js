@@ -115,7 +115,7 @@ function renderChats() {
     const item = document.createElement('div');
     item.className = `conversation-item${chat.id === state.activeChat ? ' active' : ''}`;
     const initial = (chat.name || '?').charAt(0);
-    const isAgent = chat.name === 'Agent-Pilot';
+    const isAgent = chat.name === 'JarvisAgent';
     const preview = chat.last_message ? chat.last_message.content.slice(0, 30) : '';
     const time = chat.last_message ? formatTime(chat.last_message.created_at) : '';
     item.innerHTML = `
@@ -193,7 +193,7 @@ function renderAgentCard(msg) {
   if (!card) return `<div class="message-body">${escapeHtml(msg.content)}</div>`;
 
   let headerIcon = '🤖';
-  let headerTitle = 'Agent-Pilot';
+  let headerTitle = 'JarvisAgent';
   let bodyContent = formatMessageContent(msg.content);
   let extra = '';
 
@@ -277,7 +277,7 @@ async function sendMessage(content) {
       body: JSON.stringify({ content, msg_type: 'text' }),
     });
 
-    const isAgentChat = state.chats.find(c => c.id === state.activeChat)?.name === 'Agent-Pilot';
+    const isAgentChat = state.chats.find(c => c.id === state.activeChat)?.name === 'JarvisAgent';
     const hasCommand = /帮我|生成|创建|写一|做一|总结|整理/.test(content);
     if (isAgentChat || hasCommand) {
       await fetch(`${API_BASE}/api/agent/chat`, {

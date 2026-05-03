@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Agent-Pilot Backend", lifespan=lifespan)
+app = FastAPI(title="JarvisAgent Backend", lifespan=lifespan)
 
 app.include_router(im_router, prefix="/api")
 app.include_router(agent_router, prefix="/api")

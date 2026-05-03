@@ -1,4 +1,4 @@
-# Agent-Pilot
+# JarvisAgent
 
 基于 IM 的 AI 协同办公助手。在聊天中通过自然语言指令驱动 Agent 完成文档生成、PPT 制作、聊天总结等任务。
 
@@ -85,12 +85,12 @@ python main.py
 
 ## 预设用户
 
-Alice、Bob、Charlie、Diana 四个用户 + Agent-Pilot 助手，启动时自动创建。
+Alice、Bob、Charlie、Diana 四个用户 + JarvisAgent 助手，启动时自动创建。
 
 ## 使用方式
 
 1. 选择一个用户（默认 Alice）
-2. 打开 Agent-Pilot 会话
+2. 打开 JarvisAgent 会话
 3. 输入指令，例如：
    - 「帮我写一份产品方案」
    - 「做一个项目汇报PPT」

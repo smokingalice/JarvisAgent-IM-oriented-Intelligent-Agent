@@ -2,7 +2,7 @@ import json
 from anthropic import AsyncAnthropic
 from config import ANTHROPIC_API_KEY
 
-SYSTEM_PROMPT = """你是 Agent-Pilot 的任务规划器。
+SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
 你的职责：根据用户在 IM 中的消息，理解意图并生成执行计划。
 

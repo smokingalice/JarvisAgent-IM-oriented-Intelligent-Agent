@@ -1,8 +1,8 @@
 {
-  "name": "agent-pilot-im-demo",
+  "name": "jarvis-agent",
   "version": "1.0.0",
   "private": true,
-  "description": "A runnable IM demo based on the Agent-Pilot markdown docs.",
+  "description": "IM-oriented intelligent agent for collaborative work.",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
