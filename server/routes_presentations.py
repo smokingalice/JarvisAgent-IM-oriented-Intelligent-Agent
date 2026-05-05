@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse, HTMLResponse
 from database import get_db
@@ -28,7 +29,7 @@ async def list_presentations():
 @router.get("/presentations/{pres_id}")
 async def get_presentation(pres_id: str):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM presentations WHERE id = ?", (pres_id,))
+    cursor = await db.execute("SELECT * FROM presentations WHERE id = %s", (pres_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:
@@ -50,7 +51,7 @@ async def update_presentation(pres_id: str, updates: dict):
     values = []
     for key in allowed:
         if key in updates:
-            set_clauses.append(f"{key} = ?")
+            set_clauses.append(f"{key} = %s")
             val = updates[key]
             if isinstance(val, (list, dict)):
                 val = json.dumps(val, ensure_ascii=False)
@@ -59,14 +60,14 @@ async def update_presentation(pres_id: str, updates: dict):
         await db.close()
         raise HTTPException(status_code=400, detail="No valid fields to update")
 
-    set_clauses.append("updated_at = datetime('now')")
+    set_clauses.append("updated_at = NOW()")
     values.append(pres_id)
     await db.execute(
-        f"UPDATE presentations SET {', '.join(set_clauses)} WHERE id = ?", values
+        f"UPDATE presentations SET {', '.join(set_clauses)} WHERE id = %s", values
     )
     await db.commit()
 
-    cursor = await db.execute("SELECT * FROM presentations WHERE id = ?", (pres_id,))
+    cursor = await db.execute("SELECT * FROM presentations WHERE id = %s", (pres_id,))
     row = await cursor.fetchone()
     await db.close()
     pres = dict(row)
@@ -81,7 +82,7 @@ async def update_presentation(pres_id: str, updates: dict):
 @router.get("/presentations/{pres_id}/export")
 async def export_presentation(pres_id: str, format: str = "json"):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM presentations WHERE id = ?", (pres_id,))
+    cursor = await db.execute("SELECT * FROM presentations WHERE id = %s", (pres_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:

@@ -4,6 +4,7 @@ from datetime import datetime
 from anthropic import AsyncAnthropic
 from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 from database import get_db
+from ws_manager import manager
 
 DOC_SYSTEM_PROMPT = """你是一个专业的文档撰写者。根据用户的需求生成结构化的文档内容。
 
@@ -26,15 +27,20 @@ async def create_document_tool(params: dict, chat_id: str = "") -> dict:
     content = await _generate_document_content(title, outline, tone, source_message)
 
     doc_id = f"doc_{uuid.uuid4().hex[:12]}"
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
     db = await get_db()
     await db.execute("""
         INSERT INTO documents (id, title, content, outline, status, created_by, created_at, updated_at)
-        VALUES (?, ?, ?, ?, 'draft', 'agent', ?, ?)
+        VALUES (%s, %s, %s, %s, 'draft', 'agent', %s, %s)
     """, (doc_id, title, content, json.dumps(outline, ensure_ascii=False), now, now))
     await db.commit()
     await db.close()
+
+    await manager.broadcast({
+        "type": "document_updated",
+        "data": {"id": doc_id, "title": title},
+    })
 
     return {
         "document_id": doc_id,

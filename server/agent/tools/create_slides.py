@@ -4,6 +4,7 @@ from datetime import datetime
 from anthropic import AsyncAnthropic
 from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 from database import get_db
+from ws_manager import manager
 
 SLIDES_SYSTEM_PROMPT = """你是一个专业的演示稿设计师。根据文档内容或用户需求，生成结构化的演示稿数据。
 
@@ -41,7 +42,7 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
     source_doc_id = dep_result.get("document_id") or source_doc
     if source_doc_id:
         db = await get_db()
-        cursor = await db.execute("SELECT content, title FROM documents WHERE id = ?", (source_doc_id,))
+        cursor = await db.execute("SELECT content, title FROM documents WHERE id = %s", (source_doc_id,))
         row = await cursor.fetchone()
         await db.close()
         if row:
@@ -52,15 +53,20 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
     slides = await _generate_slides(title, num_slides, source_content, params.get("source_message", ""))
 
     pres_id = f"ppt_{uuid.uuid4().hex[:12]}"
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
     db = await get_db()
     await db.execute("""
         INSERT INTO presentations (id, title, slides, source_doc_id, created_by, created_at, updated_at)
-        VALUES (?, ?, ?, ?, 'agent', ?, ?)
+        VALUES (%s, %s, %s, %s, 'agent', %s, %s)
     """, (pres_id, title, json.dumps(slides, ensure_ascii=False), source_doc_id, now, now))
     await db.commit()
     await db.close()
+
+    await manager.broadcast({
+        "type": "presentation_updated",
+        "data": {"id": pres_id, "title": title},
+    })
 
     return {
         "presentation_id": pres_id,

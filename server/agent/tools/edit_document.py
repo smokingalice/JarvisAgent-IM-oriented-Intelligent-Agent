@@ -27,7 +27,7 @@ async def edit_document_tool(params: dict, chat_id: str = "") -> dict:
         return {"error": "Missing document_id", "message": "未指定要编辑的文档"}
 
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+    cursor = await db.execute("SELECT * FROM documents WHERE id = %s", (doc_id,))
     row = await cursor.fetchone()
     if not row:
         await db.close()
@@ -40,9 +40,9 @@ async def edit_document_tool(params: dict, chat_id: str = "") -> dict:
     new_content = await _apply_edit(original_content, action, instruction, section, content)
 
     db = await get_db()
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     await db.execute(
-        "UPDATE documents SET content = ?, updated_at = ? WHERE id = ?",
+        "UPDATE documents SET content = %s, updated_at = %s WHERE id = %s",
         (new_content, now, doc_id)
     )
     await db.commit()

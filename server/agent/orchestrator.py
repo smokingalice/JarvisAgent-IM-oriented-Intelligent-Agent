@@ -88,7 +88,7 @@ class AgentOrchestrator:
         cursor = await db.execute("""
             SELECT content, sender_id, msg_type, created_at
             FROM messages
-            WHERE chat_id = ? AND recalled_at IS NULL
+            WHERE chat_id = %s AND recalled_at IS NULL
             ORDER BY created_at DESC LIMIT 20
         """, (chat_id,))
         rows = await cursor.fetchall()
@@ -263,13 +263,13 @@ class AgentOrchestrator:
 
     async def _send_agent_message(self, chat_id: str, content: str, msg_type: str = "text", card_data: dict = None):
         msg_id = f"msg_{uuid.uuid4().hex[:12]}"
-        now = datetime.utcnow().isoformat()
+        now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
         db = await get_db()
         card_json = json.dumps(card_data, ensure_ascii=False) if card_data else None
         await db.execute("""
             INSERT INTO messages (id, chat_id, sender_id, content, msg_type, card_data, created_at)
-            VALUES (?, ?, 'agent', ?, ?, ?, ?)
+            VALUES (%s, %s, 'agent', %s, %s, %s, %s)
         """, (msg_id, chat_id, content, msg_type, card_json, now))
         await db.commit()
         await db.close()
@@ -288,21 +288,21 @@ class AgentOrchestrator:
 
     async def _update_task(self, task_id: str, **kwargs):
         db = await get_db()
-        set_clauses = ["updated_at = ?"]
-        values = [datetime.utcnow().isoformat()]
+        set_clauses = ["updated_at = %s"]
+        values = [datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")]
         for key, val in kwargs.items():
             if key in ("status", "progress", "intent"):
-                set_clauses.append(f"{key} = ?")
+                set_clauses.append(f"{key} = %s")
                 values.append(val)
             elif key == "plan":
-                set_clauses.append("plan = ?")
+                set_clauses.append("plan = %s")
                 values.append(json.dumps(val, ensure_ascii=False))
             elif key == "result":
-                set_clauses.append("result = ?")
+                set_clauses.append("result = %s")
                 values.append(json.dumps(val, ensure_ascii=False))
         values.append(task_id)
         await db.execute(
-            f"UPDATE tasks SET {', '.join(set_clauses)} WHERE id = ?", values
+            f"UPDATE tasks SET {', '.join(set_clauses)} WHERE id = %s", values
         )
         await db.commit()
         await db.close()

@@ -8,7 +8,7 @@ from routes_auth import hash_password, verify_password
 async def test():
     await init_db()
     db = await get_db()
-    cursor = await db.execute("SELECT id, name, password_hash FROM users WHERE id = ?", ("alice",))
+    cursor = await db.execute("SELECT id, name, password_hash FROM users WHERE id = %s", ("alice",))
     row = await cursor.fetchone()
     await db.close()
 
@@ -25,7 +25,7 @@ async def test():
         print("No password set, setting now...")
         new_hash = hash_password("test1234")
         db = await get_db()
-        await db.execute("UPDATE users SET password_hash = ? WHERE id = ?", (new_hash, "alice"))
+        await db.execute("UPDATE users SET password_hash = %s WHERE id = %s", (new_hash, "alice"))
         await db.commit()
         await db.close()
         print(f"Password set: {new_hash[:30]}...")

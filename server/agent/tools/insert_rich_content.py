@@ -4,6 +4,7 @@ from datetime import datetime
 from anthropic import AsyncAnthropic
 from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 from database import get_db
+from ws_manager import manager
 
 RICH_CONTENT_PROMPT = """You are a document editor assistant. Based on the user's instruction, generate the appropriate rich content in Markdown format.
 
@@ -23,17 +24,21 @@ async def insert_rich_content_tool(params: dict, chat_id: str = "") -> dict:
 
     if document_id:
         db = await get_db()
-        cursor = await db.execute("SELECT content FROM documents WHERE id = ?", (document_id,))
+        cursor = await db.execute("SELECT content FROM documents WHERE id = %s", (document_id,))
         row = await cursor.fetchone()
         if row:
             existing = dict(row).get("content", "")
             new_content = existing + "\n\n" + content
             await db.execute(
-                "UPDATE documents SET content = ?, updated_at = ? WHERE id = ?",
-                (new_content, datetime.utcnow().isoformat(), document_id)
+                "UPDATE documents SET content = %s, updated_at = %s WHERE id = %s",
+                (new_content, datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), document_id)
             )
             await db.commit()
         await db.close()
+        await manager.broadcast({
+            "type": "document_updated",
+            "data": {"id": document_id, "title": "已更新文档"},
+        })
         return {
             "document_id": document_id,
             "action": action,
@@ -47,16 +52,21 @@ async def insert_rich_content_tool(params: dict, chat_id: str = "") -> dict:
         }
 
     doc_id = f"doc_{uuid.uuid4().hex[:12]}"
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     title = f"富媒体内容 - {_action_label(action)}"
 
     db = await get_db()
     await db.execute("""
         INSERT INTO documents (id, title, content, status, created_by, created_at, updated_at)
-        VALUES (?, ?, ?, 'draft', 'agent', ?, ?)
+        VALUES (%s, %s, %s, 'draft', 'agent', %s, %s)
     """, (doc_id, title, content, now, now))
     await db.commit()
     await db.close()
+
+    await manager.broadcast({
+        "type": "document_updated",
+        "data": {"id": doc_id, "title": title},
+    })
 
     return {
         "document_id": doc_id,

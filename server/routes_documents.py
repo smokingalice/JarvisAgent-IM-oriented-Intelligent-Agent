@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import PlainTextResponse, HTMLResponse
 from database import get_db
@@ -28,7 +29,7 @@ async def list_documents():
 @router.get("/documents/{doc_id}")
 async def get_document(doc_id: str):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+    cursor = await db.execute("SELECT * FROM documents WHERE id = %s", (doc_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:
@@ -50,7 +51,7 @@ async def update_document(doc_id: str, updates: dict):
     values = []
     for key in allowed:
         if key in updates:
-            set_clauses.append(f"{key} = ?")
+            set_clauses.append(f"{key} = %s")
             val = updates[key]
             if isinstance(val, (list, dict)):
                 val = json.dumps(val, ensure_ascii=False)
@@ -59,14 +60,14 @@ async def update_document(doc_id: str, updates: dict):
         await db.close()
         raise HTTPException(status_code=400, detail="No valid fields to update")
 
-    set_clauses.append("updated_at = datetime('now')")
+    set_clauses.append("updated_at = NOW()")
     values.append(doc_id)
     await db.execute(
-        f"UPDATE documents SET {', '.join(set_clauses)} WHERE id = ?", values
+        f"UPDATE documents SET {', '.join(set_clauses)} WHERE id = %s", values
     )
     await db.commit()
 
-    cursor = await db.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+    cursor = await db.execute("SELECT * FROM documents WHERE id = %s", (doc_id,))
     row = await cursor.fetchone()
     await db.close()
     doc = dict(row)
@@ -81,7 +82,7 @@ async def update_document(doc_id: str, updates: dict):
 @router.get("/documents/{doc_id}/export")
 async def export_document(doc_id: str, format: str = "md"):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM documents WHERE id = ?", (doc_id,))
+    cursor = await db.execute("SELECT * FROM documents WHERE id = %s", (doc_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:

@@ -14,9 +14,9 @@ async def share_deliverable_tool(params: dict, chat_id: str = "") -> dict:
 
     db = await get_db()
     if resource_type == "document":
-        cursor = await db.execute("SELECT id, title FROM documents WHERE id = ?", (resource_id,))
+        cursor = await db.execute("SELECT id, title FROM documents WHERE id = %s", (resource_id,))
     else:
-        cursor = await db.execute("SELECT id, title FROM presentations WHERE id = ?", (resource_id,))
+        cursor = await db.execute("SELECT id, title FROM presentations WHERE id = %s", (resource_id,))
     row = await cursor.fetchone()
     await db.close()
 

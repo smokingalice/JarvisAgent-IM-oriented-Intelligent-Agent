@@ -27,7 +27,7 @@ async def edit_slides_tool(params: dict, chat_id: str = "") -> dict:
         return {"error": "Missing presentation_id", "message": "未指定要编辑的演示稿"}
 
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM presentations WHERE id = ?", (pres_id,))
+    cursor = await db.execute("SELECT * FROM presentations WHERE id = %s", (pres_id,))
     row = await cursor.fetchone()
     if not row:
         await db.close()
@@ -44,9 +44,9 @@ async def edit_slides_tool(params: dict, chat_id: str = "") -> dict:
     new_slides = await _apply_slides_edit(slides, instruction, action, slide_id)
 
     db = await get_db()
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     await db.execute(
-        "UPDATE presentations SET slides = ?, updated_at = ? WHERE id = ?",
+        "UPDATE presentations SET slides = %s, updated_at = %s WHERE id = %s",
         (json.dumps(new_slides, ensure_ascii=False), now, pres_id)
     )
     await db.commit()

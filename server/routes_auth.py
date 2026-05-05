@@ -67,7 +67,7 @@ async def register(req: RegisterRequest):
         raise HTTPException(status_code=400, detail="Password must be at least 4 characters")
 
     db = await get_db()
-    cursor = await db.execute("SELECT id FROM users WHERE id = ?", (req.username,))
+    cursor = await db.execute("SELECT id FROM users WHERE id = %s", (req.username,))
     existing = await cursor.fetchone()
     if existing:
         await db.close()
@@ -75,32 +75,30 @@ async def register(req: RegisterRequest):
 
     password_hash = hash_password(req.password)
     name = req.name or req.username
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
     await db.execute(
-        "INSERT INTO users (id, name, avatar, status, password_hash, created_at) VALUES (?, ?, '', 'online', ?, ?)",
+        "INSERT INTO users (id, name, avatar, status, password_hash, created_at) VALUES (%s, %s, '', 'online', %s, %s)",
         (req.username, name, password_hash, now)
     )
 
-    # Auto-create a chat with JarvisAgent for the new user
     chat_id = f"chat_{req.username}_agent"
     await db.execute(
-        "INSERT OR IGNORE INTO chats (id, type, name) VALUES (?, 'private', 'JarvisAgent')",
+        "INSERT IGNORE INTO chats (id, type, name) VALUES (%s, 'private', 'JarvisAgent')",
         (chat_id,)
     )
     await db.execute(
-        "INSERT OR IGNORE INTO chat_members (chat_id, user_id) VALUES (?, ?)",
+        "INSERT IGNORE INTO chat_members (chat_id, user_id) VALUES (%s, %s)",
         (chat_id, req.username)
     )
     await db.execute(
-        "INSERT OR IGNORE INTO chat_members (chat_id, user_id) VALUES (?, 'agent')",
+        "INSERT IGNORE INTO chat_members (chat_id, user_id) VALUES (%s, 'agent')",
         (chat_id,)
     )
 
-    # Send welcome message from agent
     msg_id = f"msg_{uuid.uuid4().hex[:12]}"
     await db.execute(
-        "INSERT INTO messages (id, chat_id, sender_id, content, msg_type, created_at) VALUES (?, ?, 'agent', ?, 'text', ?)",
+        "INSERT INTO messages (id, chat_id, sender_id, content, msg_type, created_at) VALUES (%s, %s, 'agent', %s, 'text', %s)",
         (msg_id, chat_id, f"你好 {name}！我是 JarvisAgent，你的 AI 协同助手。\n\n你可以给我发指令，比如：\n- \"帮我写一份产品方案\"\n- \"把讨论整理成文档\"\n- \"做一个10页的PPT\"\n\n有什么我可以帮你的？", now)
     )
 
@@ -117,7 +115,7 @@ async def register(req: RegisterRequest):
 @router.post("/auth/login")
 async def login(req: LoginRequest):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM users WHERE id = ?", (req.username,))
+    cursor = await db.execute("SELECT * FROM users WHERE id = %s", (req.username,))
     row = await cursor.fetchone()
     await db.close()
 
@@ -127,11 +125,10 @@ async def login(req: LoginRequest):
     user = dict(row)
     password_hash = user.get("password_hash", "")
 
-    # For seed users without passwords, allow login with any password on first attempt and set it
     if not password_hash:
         db = await get_db()
         new_hash = hash_password(req.password)
-        await db.execute("UPDATE users SET password_hash = ? WHERE id = ?", (new_hash, req.username))
+        await db.execute("UPDATE users SET password_hash = %s WHERE id = %s", (new_hash, req.username))
         await db.commit()
         await db.close()
     else:
@@ -148,7 +145,7 @@ async def login(req: LoginRequest):
 @router.get("/auth/me")
 async def get_me(user_id: str = Depends(get_current_user)):
     db = await get_db()
-    cursor = await db.execute("SELECT id, name, avatar, status FROM users WHERE id = ?", (user_id,))
+    cursor = await db.execute("SELECT id, name, avatar, status FROM users WHERE id = %s", (user_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:

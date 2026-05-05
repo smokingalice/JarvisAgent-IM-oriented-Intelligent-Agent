@@ -1,0 +1,94 @@
+-- JarvisAgent MySQL 初始化脚本
+-- 使用方法: mysql -u root -p < init_mysql.sql
+
+CREATE DATABASE IF NOT EXISTS jarvis_agent CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'jarvis'@'%' IDENTIFIED BY 'jarvis123';
+GRANT ALL PRIVILEGES ON jarvis_agent.* TO 'jarvis'@'%';
+FLUSH PRIVILEGES;
+
+USE jarvis_agent;
+
+CREATE TABLE IF NOT EXISTS users (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    avatar TEXT,
+    status VARCHAR(50) DEFAULT 'online',
+    password_hash TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS friendships (
+    id VARCHAR(255) PRIMARY KEY,
+    from_user_id VARCHAR(255) NOT NULL,
+    to_user_id VARCHAR(255) NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (from_user_id) REFERENCES users(id),
+    FOREIGN KEY (to_user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS chats (
+    id VARCHAR(255) PRIMARY KEY,
+    type VARCHAR(50) DEFAULT 'private',
+    name VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS chat_members (
+    chat_id VARCHAR(255),
+    user_id VARCHAR(255),
+    PRIMARY KEY (chat_id, user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS messages (
+    id VARCHAR(255) PRIMARY KEY,
+    chat_id VARCHAR(255) NOT NULL,
+    sender_id VARCHAR(255) NOT NULL,
+    content LONGTEXT NOT NULL,
+    msg_type VARCHAR(50) DEFAULT 'text',
+    reply_to_id VARCHAR(255),
+    card_data LONGTEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    recalled_at DATETIME,
+    FOREIGN KEY (chat_id) REFERENCES chats(id),
+    FOREIGN KEY (sender_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS documents (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    content LONGTEXT,
+    outline LONGTEXT,
+    status VARCHAR(50) DEFAULT 'draft',
+    task_id VARCHAR(255),
+    created_by VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS presentations (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    slides LONGTEXT,
+    template VARCHAR(255) DEFAULT 'default',
+    source_doc_id VARCHAR(255),
+    task_id VARCHAR(255),
+    created_by VARCHAR(255),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS tasks (
+    id VARCHAR(255) PRIMARY KEY,
+    chat_id VARCHAR(255),
+    user_id VARCHAR(255),
+    intent TEXT,
+    plan LONGTEXT,
+    status VARCHAR(50) DEFAULT 'pending',
+    progress INT DEFAULT 0,
+    result LONGTEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
