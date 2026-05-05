@@ -20,7 +20,20 @@ async def init_db():
             id TEXT PRIMARY KEY,
             name TEXT NOT NULL,
             avatar TEXT DEFAULT '',
-            status TEXT DEFAULT 'online'
+            status TEXT DEFAULT 'online',
+            password_hash TEXT DEFAULT '',
+            created_at TEXT DEFAULT (datetime('now'))
+        );
+
+        CREATE TABLE IF NOT EXISTS friendships (
+            id TEXT PRIMARY KEY,
+            from_user_id TEXT NOT NULL,
+            to_user_id TEXT NOT NULL,
+            status TEXT DEFAULT 'pending',
+            created_at TEXT DEFAULT (datetime('now')),
+            updated_at TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (from_user_id) REFERENCES users(id),
+            FOREIGN KEY (to_user_id) REFERENCES users(id)
         );
 
         CREATE TABLE IF NOT EXISTS chats (
@@ -87,6 +100,15 @@ async def init_db():
             updated_at TEXT DEFAULT (datetime('now'))
         );
     """)
+    # Add columns if they don't exist (migration for existing DBs)
+    try:
+        await db.execute("ALTER TABLE users ADD COLUMN password_hash TEXT DEFAULT ''")
+    except Exception:
+        pass
+    try:
+        await db.execute("ALTER TABLE users ADD COLUMN created_at TEXT DEFAULT (datetime('now'))")
+    except Exception:
+        pass
     await _seed_data(db)
     await db.commit()
     await db.close()

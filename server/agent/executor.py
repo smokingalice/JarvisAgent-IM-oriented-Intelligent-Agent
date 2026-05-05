@@ -2,15 +2,21 @@ import asyncio
 from typing import Callable
 from agent.tools.create_document import create_document_tool
 from agent.tools.create_slides import create_slides_tool
+from agent.tools.edit_document import edit_document_tool
+from agent.tools.edit_slides import edit_slides_tool
 from agent.tools.summarize_chat import summarize_chat_tool
 from agent.tools.general_reply import general_reply_tool
+from agent.tools.share_deliverable import share_deliverable_tool
 
 
 TOOL_REGISTRY = {
     "create_document": create_document_tool,
     "create_slides": create_slides_tool,
+    "edit_document": edit_document_tool,
+    "edit_slides": edit_slides_tool,
     "summarize_chat": summarize_chat_tool,
     "general_reply": general_reply_tool,
+    "share_deliverable": share_deliverable_tool,
 }
 
 

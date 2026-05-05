@@ -7,7 +7,46 @@
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <div class="app">
+    <!-- Auth Page -->
+    <div id="auth-page" class="auth-page">
+      <div class="auth-card">
+        <h1>🤖 JarvisAgent</h1>
+        <p>AI 协同办公助手</p>
+        <div id="auth-form-login">
+          <div class="form-group">
+            <label>用户名</label>
+            <input id="login-username" type="text" placeholder="输入用户名" />
+          </div>
+          <div class="form-group">
+            <label>密码</label>
+            <input id="login-password" type="password" placeholder="输入密码" />
+          </div>
+          <button class="btn-primary" onclick="doLogin()">登录</button>
+          <div class="auth-switch">没有账号？<a onclick="showRegister()">注册新账号</a></div>
+          <div id="login-error" class="auth-error"></div>
+        </div>
+        <div id="auth-form-register" style="display:none;">
+          <div class="form-group">
+            <label>用户名</label>
+            <input id="reg-username" type="text" placeholder="输入用户名（登录ID）" />
+          </div>
+          <div class="form-group">
+            <label>显示名称</label>
+            <input id="reg-name" type="text" placeholder="你的显示名称" />
+          </div>
+          <div class="form-group">
+            <label>密码</label>
+            <input id="reg-password" type="password" placeholder="设置密码（至少4位）" />
+          </div>
+          <button class="btn-primary" onclick="doRegister()">注册</button>
+          <div class="auth-switch">已有账号？<a onclick="showLogin()">去登录</a></div>
+          <div id="reg-error" class="auth-error"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App (hidden until login) -->
+    <div id="main-app" class="app" style="display:none;">
       <!-- Navigation -->
       <nav class="nav-bar">
         <div class="nav-brand">🤖 JarvisAgent</div>
@@ -15,9 +54,11 @@
           <button class="nav-tab active" data-view="im">💬 IM</button>
           <button class="nav-tab" data-view="documents">📄 文档</button>
           <button class="nav-tab" data-view="slides">📊 演示稿</button>
+          <button class="nav-tab" data-view="friends">👥 好友</button>
         </div>
         <div class="nav-user">
-          <select id="viewer-select" aria-label="切换账号"></select>
+          <span class="user-name" id="nav-username"></span>
+          <button class="btn-sm btn-danger" onclick="doLogout()">退出</button>
         </div>
       </nav>
 
@@ -76,6 +117,30 @@
         <main class="slides-panel">
           <div id="slides-content" class="slides-content">
             <div class="empty-state">选择左侧演示稿查看，或在 IM 中让 Agent 生成</div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Friends View -->
+      <div id="view-friends" class="view">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <h3>👥 好友列表</h3>
+          </div>
+          <div id="friends-list" class="friends-list"></div>
+        </aside>
+        <main class="friends-panel">
+          <div class="friends-section">
+            <h3>添加好友</h3>
+            <div class="add-friend-form">
+              <input id="add-friend-input" type="text" placeholder="输入用户名搜索" />
+              <button onclick="searchAndAddFriend()">搜索</button>
+            </div>
+            <div id="search-results"></div>
+          </div>
+          <div class="friends-section">
+            <h3>好友请求</h3>
+            <div id="friend-requests"></div>
           </div>
         </main>
       </div>

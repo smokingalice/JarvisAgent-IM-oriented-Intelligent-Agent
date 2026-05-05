@@ -2,7 +2,7 @@ import uuid
 import json
 from datetime import datetime
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 from database import get_db
 
 SLIDES_SYSTEM_PROMPT = """你是一个专业的演示稿设计师。根据文档内容或用户需求，生成结构化的演示稿数据。
@@ -80,7 +80,7 @@ async def _generate_slides(title: str, num_slides: int, source_content: str, sou
         return _fallback_slides(title, num_slides)
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
         prompt = f"""请为以下演示稿生成 {num_slides} 页幻灯片内容：
 
 标题：{title}
@@ -92,7 +92,7 @@ async def _generate_slides(title: str, num_slides: int, source_content: str, sou
             prompt += f"\n用户原始需求：{source_message}"
 
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model=ANTHROPIC_MODEL,
             max_tokens=4096,
             system=SLIDES_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],

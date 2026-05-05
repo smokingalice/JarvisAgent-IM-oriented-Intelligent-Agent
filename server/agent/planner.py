@@ -1,6 +1,6 @@
 import json
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 
 SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
@@ -8,10 +8,11 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
 可用工具：
 - create_document: 创建新文档（需要标题和大纲）
-- edit_document: 编辑已有文档
+- edit_document: 编辑已有文档（需要 document_id、action、instruction）
 - create_slides: 创建演示稿/PPT（可基于文档或直接创建）
-- edit_slides: 编辑演示稿
+- edit_slides: 编辑已有演示稿（需要 presentation_id、action、instruction）
 - summarize_chat: 总结聊天内容
+- share_deliverable: 分享交付物（需要 resource_id、resource_type）
 - general_reply: 普通对话回复（不需要创建任何产出物时使用）
 
 规则：
@@ -19,6 +20,8 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 2. 如果信息不足以开始任务，在 clarifications_needed 中提出问题
 3. 任务之间有依赖关系时，用 depends_on 标注
 4. 每个任务都要有清晰的 name 和合理的 params
+5. 如果用户说"修改"、"改一下"、"加上"等编辑指令，使用 edit_document 或 edit_slides
+6. 如果用户说"分享"、"发给"等，使用 share_deliverable
 
 输出 JSON 格式（严格遵守）：
 {
@@ -40,7 +43,7 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
 class Planner:
     def __init__(self):
-        self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+        self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL) if ANTHROPIC_API_KEY else None
 
     async def create_plan(self, message: str, chat_id: str, user_id: str) -> dict:
         if not self.client:
@@ -48,7 +51,7 @@ class Planner:
 
         try:
             response = await self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model=ANTHROPIC_MODEL,
                 max_tokens=2048,
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": message}],
@@ -64,7 +67,49 @@ class Planner:
         """Fallback when no API key or API call fails — use keyword matching."""
         msg_lower = message.lower()
 
-        if any(kw in msg_lower for kw in ["写", "生成", "创建", "写一份", "帮我写"]):
+        # Edit commands
+        if any(kw in msg_lower for kw in ["修改", "改一下", "加上", "添加", "删除", "替换", "更新"]):
+            if any(kw in msg_lower for kw in ["ppt", "演示", "幻灯片", "slides"]):
+                return {
+                    "intent": "修改演示稿",
+                    "clarifications_needed": [],
+                    "tasks": [{
+                        "id": "step_1",
+                        "name": "修改演示稿",
+                        "tool": "edit_slides",
+                        "params": {"instruction": message, "action": "update_text"},
+                        "depends_on": [],
+                    }],
+                }
+            if any(kw in msg_lower for kw in ["文档", "方案", "报告"]):
+                return {
+                    "intent": "修改文档",
+                    "clarifications_needed": [],
+                    "tasks": [{
+                        "id": "step_1",
+                        "name": "修改文档",
+                        "tool": "edit_document",
+                        "params": {"instruction": message, "action": "replace"},
+                        "depends_on": [],
+                    }],
+                }
+
+        # Share commands
+        if any(kw in msg_lower for kw in ["分享", "发给", "共享", "发送"]):
+            return {
+                "intent": "分享交付物",
+                "clarifications_needed": [],
+                "tasks": [{
+                    "id": "step_1",
+                    "name": "分享文件",
+                    "tool": "share_deliverable",
+                    "params": {"share_to": "current_chat"},
+                    "depends_on": [],
+                }],
+            }
+
+        # Create commands
+        if any(kw in msg_lower for kw in ["写", "生成", "创建", "写一份", "帮我写", "做一个"]):
             has_doc = any(kw in msg_lower for kw in ["文档", "方案", "报告", "文章"])
             has_ppt = any(kw in msg_lower for kw in ["ppt", "演示", "幻灯片", "slides"])
 
@@ -99,7 +144,7 @@ class Planner:
             if not tasks:
                 tasks.append({
                     "id": "step_1",
-                    "name": f"生成文档",
+                    "name": "生成文档",
                     "tool": "create_document",
                     "params": {
                         "title": self._extract_title(message),
@@ -117,6 +162,7 @@ class Planner:
                 "tasks": tasks,
             }
 
+        # Summarize commands
         if any(kw in msg_lower for kw in ["总结", "整理", "归纳"]):
             return {
                 "intent": "总结对话内容",
@@ -130,6 +176,7 @@ class Planner:
                 }],
             }
 
+        # Default: general reply
         return {
             "intent": "回复用户消息",
             "clarifications_needed": [],
@@ -143,7 +190,7 @@ class Planner:
         }
 
     def _extract_title(self, message: str) -> str:
-        for prefix in ["帮我写一份", "帮我写", "帮我生成", "帮我创建", "写一份", "写一个", "生成", "创建"]:
+        for prefix in ["帮我写一份", "帮我写", "帮我生成", "帮我创建", "写一份", "写一个", "生成", "创建", "做一个", "做一份"]:
             if prefix in message:
                 rest = message.split(prefix, 1)[1]
                 title = rest.split("，")[0].split(",")[0].split("。")[0].split("\n")[0].strip()

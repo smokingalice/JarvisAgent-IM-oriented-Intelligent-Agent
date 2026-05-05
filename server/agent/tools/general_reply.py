@@ -1,5 +1,5 @@
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 
 
 async def general_reply_tool(params: dict, chat_id: str = "") -> dict:
@@ -9,9 +9,9 @@ async def general_reply_tool(params: dict, chat_id: str = "") -> dict:
         return {"message": f"收到你的消息。我是 JarvisAgent，可以帮你生成文档、制作PPT、总结聊天内容等。试试对我说「帮我写一份产品方案」？"}
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model=ANTHROPIC_MODEL,
             max_tokens=1024,
             system="""你是 JarvisAgent，一个 AI 协同办公助手。你可以帮用户：
 1. 生成文档（方案、报告、文章等）
