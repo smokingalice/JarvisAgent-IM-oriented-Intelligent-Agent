@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4F46E5" />
+    <meta name="description" content="JarvisAgent - AI 协同办公助手，支持 IM、文档、演示稿智能生成" />
+    <link rel="manifest" href="/static/manifest.json" />
+    <link rel="apple-touch-icon" href="/static/icon-192.svg" />
     <title>JarvisAgent | AI 协同办公</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
@@ -85,6 +89,7 @@
           </section>
 
           <form id="composer" class="composer">
+            <button type="button" id="voice-btn" class="voice-btn" title="语音输入">🎤</button>
             <textarea id="message-input" rows="2" placeholder="输入消息... (输入指令如「帮我写一份产品方案」触发 Agent)"></textarea>
             <button id="send-button" type="submit">发送</button>
           </form>
@@ -147,5 +152,10 @@
     </div>
 
     <script src="/static/app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/sw.js').catch(() => {});
+      }
+    </script>
   </body>
 </html>

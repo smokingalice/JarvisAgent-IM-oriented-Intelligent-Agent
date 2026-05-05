@@ -13,6 +13,7 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 - edit_slides: 编辑已有演示稿（需要 presentation_id、action、instruction）
 - summarize_chat: 总结聊天内容
 - share_deliverable: 分享交付物（需要 resource_id、resource_type）
+- insert_rich_content: 在文档中插入富媒体（表格、图片占位、布局调整）
 - general_reply: 普通对话回复（不需要创建任何产出物时使用）
 
 规则：
@@ -45,25 +46,36 @@ class Planner:
     def __init__(self):
         self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL) if ANTHROPIC_API_KEY else None
 
-    async def create_plan(self, message: str, chat_id: str, user_id: str) -> dict:
+    async def create_plan(self, message: str, chat_id: str, user_id: str, context: dict = None) -> dict:
         if not self.client:
-            return self._fallback_plan(message)
+            return self._fallback_plan(message, context)
 
         try:
+            context_str = ""
+            if context and context.get("recent_messages"):
+                recent = context["recent_messages"][-5:]
+                context_str = "\n最近的对话上下文：\n" + "\n".join(
+                    f"  {m['sender_id']}: {m['content'][:100]}" for m in recent if m.get("content")
+                )
+            if context and context.get("recent_artifacts"):
+                context_str += "\n已有的产出物：" + ", ".join(
+                    f"{a['title']}({a['type']})" for a in context["recent_artifacts"]
+                )
+
             response = await self.client.messages.create(
                 model=ANTHROPIC_MODEL,
                 max_tokens=2048,
                 system=SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": message}],
+                messages=[{"role": "user", "content": message + context_str}],
             )
             text = response.content[0].text.strip()
             if text.startswith("```"):
                 text = text.split("\n", 1)[1].rsplit("```", 1)[0]
             return json.loads(text)
-        except Exception as e:
-            return self._fallback_plan(message)
+        except Exception:
+            return self._fallback_plan(message, context)
 
-    def _fallback_plan(self, message: str) -> dict:
+    def _fallback_plan(self, message: str, context: dict = None) -> dict:
         """Fallback when no API key or API call fails — use keyword matching."""
         msg_lower = message.lower()
 
@@ -107,6 +119,21 @@ class Planner:
                     "depends_on": [],
                 }],
             }
+
+        # Proactive clarification for vague requests
+        if any(kw in msg_lower for kw in ["写", "生成", "创建", "帮我写", "做一个"]):
+            vague_patterns = ["写点什么", "写个东西", "帮我写", "生成一下", "做一个"]
+            is_vague = any(p == msg_lower.strip() for p in vague_patterns) or len(message.strip()) < 6
+            if is_vague:
+                return {
+                    "intent": "需要更多信息",
+                    "clarifications_needed": [
+                        "你想让我写什么类型的内容？（文档/方案/报告/PPT）",
+                        "关于什么主题？",
+                        "有没有特定的要求，比如篇幅、风格或受众？",
+                    ],
+                    "tasks": [],
+                }
 
         # Create commands
         if any(kw in msg_lower for kw in ["写", "生成", "创建", "写一份", "帮我写", "做一个"]):
@@ -160,6 +187,21 @@ class Planner:
                 "intent": intent,
                 "clarifications_needed": [],
                 "tasks": tasks,
+            }
+
+        # Rich media / canvas commands
+        if any(kw in msg_lower for kw in ["插入表格", "加个表格", "添加表格", "插入图片", "加张图", "布局", "排版"]):
+            action = "insert_table" if "表格" in msg_lower else "insert_image" if "图" in msg_lower else "adjust_layout"
+            return {
+                "intent": "富媒体操作",
+                "clarifications_needed": [],
+                "tasks": [{
+                    "id": "step_1",
+                    "name": f"执行富媒体操作: {action}",
+                    "tool": "insert_rich_content",
+                    "params": {"action": action, "instruction": message},
+                    "depends_on": [],
+                }],
             }
 
         # Summarize commands

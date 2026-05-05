@@ -7,6 +7,7 @@ from agent.tools.edit_slides import edit_slides_tool
 from agent.tools.summarize_chat import summarize_chat_tool
 from agent.tools.general_reply import general_reply_tool
 from agent.tools.share_deliverable import share_deliverable_tool
+from agent.tools.insert_rich_content import insert_rich_content_tool
 
 
 TOOL_REGISTRY = {
@@ -17,6 +18,7 @@ TOOL_REGISTRY = {
     "summarize_chat": summarize_chat_tool,
     "general_reply": general_reply_tool,
     "share_deliverable": share_deliverable_tool,
+    "insert_rich_content": insert_rich_content_tool,
 }
 
 

@@ -34,6 +34,7 @@ function showMainApp() {
   document.getElementById('nav-username').textContent = state.currentUser.name || state.currentUser.id;
   initNav();
   initComposer();
+  initVoiceInput();
   connectWebSocket();
   loadChats();
   loadDocuments();
@@ -615,7 +616,16 @@ async function loadDocumentContent(docId) {
     const res = await fetch(`${API_BASE}/api/documents/${docId}`, { headers: authHeaders() });
     const doc = await res.json();
     const container = document.getElementById('doc-content');
-    container.innerHTML = renderMarkdown(doc.content || `# ${doc.title}\n\n文档内容加载中...`);
+    container.innerHTML = `
+      <div class="doc-toolbar">
+        <h2>${escapeHtml(doc.title)}</h2>
+        <div class="export-btns">
+          <button onclick="exportDocument('${docId}','md')" title="导出 Markdown">📥 MD</button>
+          <button onclick="exportDocument('${docId}','html')" title="导出 HTML">📥 HTML</button>
+        </div>
+      </div>
+      <div class="doc-body">${renderMarkdown(doc.content || '文档内容加载中...')}</div>
+    `;
   } catch (e) {
     console.error('Failed to load document:', e);
   }
@@ -667,6 +677,17 @@ async function loadSlidesContent(presId) {
       container.innerHTML = '<div class="empty-state">演示稿暂无内容</div>';
       return;
     }
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'doc-toolbar';
+    toolbar.innerHTML = `
+      <h2>${escapeHtml(pres.title)}</h2>
+      <div class="export-btns">
+        <button onclick="exportPresentation('${presId}','json')" title="导出 JSON">📥 JSON</button>
+        <button onclick="exportPresentation('${presId}','html')" title="导出 HTML">📥 HTML</button>
+      </div>
+    `;
+    container.appendChild(toolbar);
 
     slides.forEach((slide, idx) => {
       const el = document.createElement('div');
@@ -764,4 +785,87 @@ function showToast(message, type = '') {
   toast.textContent = message;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);
+}
+
+// ==================== Voice Input (Web Speech API) ====================
+function initVoiceInput() {
+  const voiceBtn = document.getElementById('voice-btn');
+  if (!voiceBtn) return;
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    voiceBtn.style.display = 'none';
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'zh-CN';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  let isListening = false;
+
+  voiceBtn.addEventListener('click', () => {
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    isListening = true;
+    voiceBtn.classList.add('listening');
+    voiceBtn.textContent = '⏹️';
+    recognition.start();
+  });
+
+  recognition.onresult = (event) => {
+    const text = event.results[0][0].transcript;
+    const input = document.getElementById('message-input');
+    input.value = text;
+    input.focus();
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    voiceBtn.classList.remove('listening');
+    voiceBtn.textContent = '🎤';
+  };
+
+  recognition.onerror = () => {
+    isListening = false;
+    voiceBtn.classList.remove('listening');
+    voiceBtn.textContent = '🎤';
+  };
+}
+
+// ==================== Export Functions ====================
+async function exportDocument(docId, format) {
+  try {
+    const res = await fetch(`${API_BASE}/api/documents/${docId}/export?format=${format}`, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Export failed');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `document.${format === 'html' ? 'html' : 'md'}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('导出成功', 'success');
+  } catch (e) {
+    showToast('导出失败', 'error');
+  }
+}
+
+async function exportPresentation(presId, format) {
+  try {
+    const res = await fetch(`${API_BASE}/api/presentations/${presId}/export?format=${format}`, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Export failed');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `presentation.${format === 'html' ? 'html' : 'json'}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('导出成功', 'success');
+  } catch (e) {
+    showToast('导出失败', 'error');
+  }
 }

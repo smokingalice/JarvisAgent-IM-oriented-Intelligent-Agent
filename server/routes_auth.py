@@ -47,10 +47,15 @@ def verify_token(token: str) -> str:
         raise HTTPException(status_code=401, detail="Invalid token")
 
 
+_revoked_tokens: set = set()
+
+
 async def get_current_user(authorization: str = Header(default=None)) -> str:
     if not authorization:
         raise HTTPException(status_code=401, detail="Missing authorization header")
     token = authorization.replace("Bearer ", "")
+    if token in _revoked_tokens:
+        raise HTTPException(status_code=401, detail="Token has been revoked")
     return verify_token(token)
 
 
@@ -149,3 +154,22 @@ async def get_me(user_id: str = Depends(get_current_user)):
     if not row:
         raise HTTPException(status_code=404, detail="User not found")
     return dict(row)
+
+
+@router.post("/auth/logout")
+async def logout(user_id: str = Depends(get_current_user), authorization: str = Header(default=None)):
+    if authorization:
+        token = authorization.replace("Bearer ", "")
+        _revoked_tokens.add(token)
+    return {"status": "ok"}
+
+
+@router.get("/sessions")
+async def list_sessions(user_id: str = Depends(get_current_user)):
+    from ws_manager import manager
+    connections = manager.user_connections.get(user_id, set())
+    return {
+        "user_id": user_id,
+        "active_sessions": len(connections),
+        "online": len(connections) > 0,
+    }
