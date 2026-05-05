@@ -122,6 +122,13 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Sego
 .agent-card-header .title { font-weight: 600; font-size: 14px; color: var(--text); }
 .agent-card-body { font-size: 13px; line-height: 1.7; color: var(--text); }
 .agent-card-body strong { font-weight: 600; }
+.generation-mode {
+  display: inline-block; margin-top: 8px; padding: 3px 8px;
+  border-radius: 999px; font-size: 11px; font-weight: 500;
+}
+.generation-mode.mode-llm { background: #dcfce7; color: #166534; }
+.generation-mode.mode-fallback { background: #fef3c7; color: #92400e; }
+.generation-mode.mode-mixed { background: #dbeafe; color: #1e40af; }
 .agent-card .progress-bar {
   height: 6px; background: var(--border); border-radius: 3px; margin-top: 12px; overflow: hidden;
 }

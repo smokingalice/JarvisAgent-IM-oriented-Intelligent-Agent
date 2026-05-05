@@ -1,6 +1,7 @@
 import json
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_DEFAULT_SONNET_MODEL
+from agent.llm_debug import extract_response_text, log_llm_error
 
 SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
@@ -40,7 +41,7 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
 class Planner:
     def __init__(self):
-        self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY) if ANTHROPIC_API_KEY else None
+        self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL) if ANTHROPIC_API_KEY else None
 
     async def create_plan(self, message: str, chat_id: str, user_id: str) -> dict:
         if not self.client:
@@ -48,16 +49,20 @@ class Planner:
 
         try:
             response = await self.client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model=ANTHROPIC_DEFAULT_SONNET_MODEL,
                 max_tokens=2048,
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": message}],
             )
-            text = response.content[0].text.strip()
+            text = extract_response_text(response)
             if text.startswith("```"):
                 text = text.split("\n", 1)[1].rsplit("```", 1)[0]
-            return json.loads(text)
+            plan = json.loads(text)
+            plan["generation_mode"] = "llm"
+            plan["model"] = ANTHROPIC_DEFAULT_SONNET_MODEL
+            return plan
         except Exception as e:
+            log_llm_error("Planner.create_plan", e)
             return self._fallback_plan(message)
 
     def _fallback_plan(self, message: str) -> dict:
@@ -113,6 +118,8 @@ class Planner:
             intent = "创建" + ("文档" if has_doc else "") + ("和" if has_doc and has_ppt else "") + ("演示稿" if has_ppt else "文档")
             return {
                 "intent": intent,
+                "generation_mode": "fallback",
+                "model": None,
                 "clarifications_needed": [],
                 "tasks": tasks,
             }
@@ -120,6 +127,8 @@ class Planner:
         if any(kw in msg_lower for kw in ["总结", "整理", "归纳"]):
             return {
                 "intent": "总结对话内容",
+                "generation_mode": "fallback",
+                "model": None,
                 "clarifications_needed": [],
                 "tasks": [{
                     "id": "step_1",
@@ -132,6 +141,8 @@ class Planner:
 
         return {
             "intent": "回复用户消息",
+            "generation_mode": "fallback",
+            "model": None,
             "clarifications_needed": [],
             "tasks": [{
                 "id": "step_1",

@@ -2,8 +2,9 @@ import uuid
 import json
 from datetime import datetime
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_DEFAULT_SONNET_MODEL
 from database import get_db
+from agent.llm_debug import extract_response_text, log_llm_error
 
 SLIDES_SYSTEM_PROMPT = """你是一个专业的演示稿设计师。根据文档内容或用户需求，生成结构化的演示稿数据。
 
@@ -49,7 +50,7 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
             if not title or title == "未命名演示稿":
                 title = dict(row).get("title", title)
 
-    slides = await _generate_slides(title, num_slides, source_content, params.get("source_message", ""))
+    slides, generation_mode = await _generate_slides(title, num_slides, source_content, params.get("source_message", ""))
 
     pres_id = f"ppt_{uuid.uuid4().hex[:12]}"
     now = datetime.utcnow().isoformat()
@@ -66,6 +67,8 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
         "presentation_id": pres_id,
         "title": title,
         "slide_count": len(slides),
+        "generation_mode": generation_mode,
+        "model": ANTHROPIC_DEFAULT_SONNET_MODEL if generation_mode == "llm" else None,
         "artifact": {
             "type": "presentation",
             "id": pres_id,
@@ -75,12 +78,12 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
     }
 
 
-async def _generate_slides(title: str, num_slides: int, source_content: str, source_message: str) -> list:
+async def _generate_slides(title: str, num_slides: int, source_content: str, source_message: str) -> tuple[list, str]:
     if not ANTHROPIC_API_KEY:
-        return _fallback_slides(title, num_slides)
+        return _fallback_slides(title, num_slides), "fallback"
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
         prompt = f"""请为以下演示稿生成 {num_slides} 页幻灯片内容：
 
 标题：{title}
@@ -92,17 +95,18 @@ async def _generate_slides(title: str, num_slides: int, source_content: str, sou
             prompt += f"\n用户原始需求：{source_message}"
 
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model=ANTHROPIC_DEFAULT_SONNET_MODEL,
             max_tokens=4096,
             system=SLIDES_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],
         )
-        text = response.content[0].text.strip()
+        text = extract_response_text(response)
         if text.startswith("```"):
             text = text.split("\n", 1)[1].rsplit("```", 1)[0]
-        return json.loads(text)
-    except Exception:
-        return _fallback_slides(title, num_slides)
+        return json.loads(text), "llm"
+    except Exception as e:
+        log_llm_error("create_slides_tool", e)
+        return _fallback_slides(title, num_slides), "fallback"
 
 
 def _fallback_slides(title: str, num_slides: int) -> list:

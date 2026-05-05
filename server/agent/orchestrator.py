@@ -31,6 +31,10 @@ class AgentOrchestrator:
                 task_id, status="planned", progress=20,
                 intent=plan.get("intent", ""),
                 plan=plan.get("tasks", []),
+                result={
+                    "planning_mode": plan.get("generation_mode", "fallback"),
+                    "planning_model": plan.get("model"),
+                },
             )
 
             if plan.get("clarifications_needed"):
@@ -46,6 +50,8 @@ class AgentOrchestrator:
             await self._send_agent_message(chat_id, plan_summary, msg_type="agent_card", card_data={
                 "type": "plan",
                 "task_id": task_id,
+                "generation_mode": plan.get("generation_mode", "fallback"),
+                "model": plan.get("model"),
                 "tasks": plan.get("tasks", []),
             })
 
@@ -64,6 +70,8 @@ class AgentOrchestrator:
             await self._send_agent_message(chat_id, delivery_msg, msg_type="agent_card", card_data={
                 "type": "delivery",
                 "task_id": task_id,
+                "generation_mode": results.get("generation_mode", "fallback"),
+                "model": results.get("model"),
                 "results": results,
             })
 
@@ -89,6 +97,10 @@ class AgentOrchestrator:
 
     def _format_plan_summary(self, plan: dict) -> str:
         lines = [f"好的，我来帮你完成这个任务。\n"]
+        mode = plan.get("generation_mode", "fallback")
+        mode_text = "LLM 模式" if mode == "llm" else "降级模式"
+        model = plan.get("model")
+        lines.append(f"**规划模式**：{mode_text}{f'（{model}）' if model else ''}\n")
         lines.append(f"**目标**：{plan.get('intent', '执行任务')}\n")
         lines.append("**执行计划**：")
         for i, task in enumerate(plan.get("tasks", []), 1):
@@ -99,6 +111,10 @@ class AgentOrchestrator:
 
     def _format_delivery(self, results: dict) -> str:
         lines = ["✅ **任务完成！**\n\n以下是本次工作成果：\n"]
+        mode = results.get("generation_mode", "fallback")
+        mode_text = "LLM 模式" if mode == "llm" else "混合模式" if mode == "mixed" else "降级模式"
+        model = results.get("model")
+        lines.append(f"**生成模式**：{mode_text}{f'（{model}）' if model else ''}\n")
         artifacts = results.get("artifacts", [])
         for art in artifacts:
             if art["type"] == "document":

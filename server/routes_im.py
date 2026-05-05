@@ -30,6 +30,17 @@ async def get_chats(user_id: str = "alice"):
     chats = [dict(row) for row in await cursor.fetchall()]
 
     for chat in chats:
+        if chat["type"] == "private":
+            member_cursor = await db.execute("""
+                SELECT u.id, u.name
+                FROM chat_members cm
+                JOIN users u ON cm.user_id = u.id
+                WHERE cm.chat_id = ? AND cm.user_id != ?
+                LIMIT 1
+            """, (chat["id"], user_id))
+            other_member = await member_cursor.fetchone()
+            if other_member:
+                chat["name"] = dict(other_member)["name"]
         msg_cursor = await db.execute("""
             SELECT * FROM messages
             WHERE chat_id = ? AND recalled_at IS NULL
@@ -106,11 +117,6 @@ async def send_message(chat_id: str, req: SendMessageRequest, user_id: str = "al
         "type": "new_message",
         "data": message,
     }, f"chat:{chat_id}")
-
-    await manager.broadcast({
-        "type": "new_message",
-        "data": message,
-    })
 
     await db.close()
     return message

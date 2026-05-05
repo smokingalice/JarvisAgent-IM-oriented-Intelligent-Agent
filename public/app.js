@@ -219,6 +219,8 @@ function renderAgentCard(msg) {
     progressHtml = `<div class="progress-bar"><div class="progress-fill" id="progress-${card.task_id}" style="width: 0%"></div></div>`;
   }
 
+  const modeHtml = renderGenerationMode(card);
+
   return `
     <div class="agent-card">
       <div class="agent-card-header">
@@ -226,10 +228,21 @@ function renderAgentCard(msg) {
         <span class="title">${headerTitle}</span>
       </div>
       <div class="agent-card-body">${bodyContent}</div>
+      ${modeHtml}
       ${extra}
       ${progressHtml}
     </div>
   `;
+}
+
+function renderGenerationMode(card) {
+  const mode = card.generation_mode || card.results?.generation_mode;
+  if (!mode) return '';
+  const model = card.model || card.results?.model;
+  const label = mode === 'llm' ? 'LLM 模式' : mode === 'mixed' ? '混合模式' : '降级模式';
+  const className = mode === 'llm' ? 'mode-llm' : mode === 'mixed' ? 'mode-mixed' : 'mode-fallback';
+  const modelText = model ? ` · ${escapeHtml(model)}` : '';
+  return `<div class="generation-mode ${className}">${label}${modelText}</div>`;
 }
 
 function viewArtifact(type, id) {
@@ -431,7 +444,9 @@ function renderSlide(slide, num, total) {
 // ==================== Utilities ====================
 function formatTime(isoStr) {
   if (!isoStr) return '';
-  const d = new Date(isoStr);
+  const normalizedIso = /Z$|[+-]\d{2}:?\d{2}$/.test(isoStr) ? isoStr : `${isoStr}Z`;
+  const d = new Date(normalizedIso);
+  if (Number.isNaN(d.getTime())) return '';
   const now = new Date();
   if (d.toDateString() === now.toDateString()) {
     return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });

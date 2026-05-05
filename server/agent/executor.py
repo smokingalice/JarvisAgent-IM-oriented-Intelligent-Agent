@@ -28,6 +28,8 @@ class Executor:
         total_steps = len(tasks)
         results = {}
         artifacts = []
+        generation_modes = set()
+        models = set()
 
         for i, step in enumerate(tasks):
             step_id = step.get("id", f"step_{i}")
@@ -52,6 +54,10 @@ class Executor:
             try:
                 result = await tool_fn(params, chat_id=chat_id)
                 results[step_id] = result
+                if result.get("generation_mode"):
+                    generation_modes.add(result["generation_mode"])
+                if result.get("model"):
+                    models.add(result["model"])
                 if result.get("artifact"):
                     artifacts.append(result["artifact"])
             except Exception as e:
@@ -62,6 +68,8 @@ class Executor:
 
         return {
             "task_id": task_id,
+            "generation_mode": "mixed" if len(generation_modes) > 1 else next(iter(generation_modes), plan.get("generation_mode", "fallback")),
+            "model": next(iter(models), plan.get("model")),
             "artifacts": artifacts,
             "steps": results,
             "message": f"成功完成 {total_steps} 个步骤",
