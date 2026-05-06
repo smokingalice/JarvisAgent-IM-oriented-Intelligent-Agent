@@ -8,7 +8,6 @@ plugins {
 android {
     namespace = "com.jarvisagent.jarvis_client"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
