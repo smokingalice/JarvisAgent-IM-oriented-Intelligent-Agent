@@ -15,6 +15,12 @@ orchestrator = AgentOrchestrator()
 @router.post("/agent/chat")
 async def agent_chat(req: AgentRequest, background_tasks: BackgroundTasks):
     """Submit a message to the Agent. Triggers intent parsing and task execution."""
+
+    # Summary mode: lightweight inline summary, no background task
+    if req.mode == "summary":
+        summary = orchestrator.generate_quick_summary(req.message)
+        return {"summary": summary}
+
     task_id = f"task_{uuid.uuid4().hex[:12]}"
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 

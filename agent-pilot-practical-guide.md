@@ -186,6 +186,7 @@ const response = await claude.messages.create({
       description: "创建演示稿",
       input_schema: { /* ... */ }
     }
+    
   ]
 });
 // Claude 会返回 tool_use，告诉你该调哪些工具、什么参数

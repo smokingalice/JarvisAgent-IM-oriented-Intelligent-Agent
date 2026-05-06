@@ -200,6 +200,44 @@ function handleNewMessage(message) {
     scrollToBottom();
   }
   loadChats();
+
+  // Trigger agent summary only for messages received from others (not self, not agent)
+  if (message.sender_id !== state.currentUser.id && message.sender_id !== 'agent') {
+    triggerAgentSummary(message);
+  }
+}
+
+async function triggerAgentSummary(message) {
+  try {
+    const res = await fetch(`${API_BASE}/api/agent/chat`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({
+        message: message.content,
+        chat_id: message.chat_id,
+        user_id: state.currentUser.id,
+        mode: 'summary',
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.summary) {
+        showAgentHint(message.chat_id, data.summary);
+      }
+    }
+  } catch (e) {
+    console.error('Agent summary failed:', e);
+  }
+}
+
+function showAgentHint(chatId, summary) {
+  if (chatId !== state.activeChat) return;
+  const list = document.getElementById('message-list');
+  const hint = document.createElement('div');
+  hint.className = 'agent-hint';
+  hint.textContent = `✨ ${summary}`;
+  list.appendChild(hint);
+  scrollToBottom();
 }
 
 function handleTaskProgress(data) {
@@ -391,22 +429,6 @@ async function sendMessage(content) {
       headers: authHeaders(),
       body: JSON.stringify({ content, msg_type: 'text' }),
     });
-
-    // Check if should trigger agent
-    const chatInfo = state.chats.find(c => c.id === state.activeChat);
-    const isAgentChat = chatInfo && (chatInfo.display_name === 'JarvisAgent' || chatInfo.name === 'JarvisAgent');
-    const hasCommand = /帮我|生成|创建|写一|做一|总结|整理|修改|改一下|分享|发给/.test(content);
-    if (isAgentChat || hasCommand) {
-      await fetch(`${API_BASE}/api/agent/chat`, {
-        method: 'POST',
-        headers: authHeaders(),
-        body: JSON.stringify({
-          message: content,
-          chat_id: state.activeChat,
-          user_id: state.currentUser.id,
-        }),
-      });
-    }
   } catch (e) {
     console.error('Failed to send message:', e);
     showToast('发送失败，请重试', 'error');

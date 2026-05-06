@@ -75,6 +75,19 @@ async def send_friend_request(target_user_id: str, user_id: str = Depends(get_cu
         if existing["status"] == "pending":
             await db.close()
             raise HTTPException(status_code=409, detail="Friend request already pending")
+        if existing["status"] == "rejected":
+            now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+            await db.execute(
+                "UPDATE friendships SET from_user_id = %s, to_user_id = %s, status = 'pending', updated_at = %s WHERE id = %s",
+                (user_id, target_user_id, now, existing["id"])
+            )
+            await db.commit()
+            await db.close()
+            await manager.broadcast_to_user(target_user_id, {
+                "type": "friend_request",
+                "data": {"id": existing["id"], "from_user_id": user_id, "created_at": now}
+            })
+            return {"id": existing["id"], "status": "pending"}
 
     friendship_id = f"fr_{uuid.uuid4().hex[:12]}"
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")

@@ -193,6 +193,11 @@ html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Sego
 }
 .agent-card .artifact-link:hover { background: #4338ca; }
 
+.agent-hint {
+  font-size: 11px; color: var(--text-secondary); padding: 4px 16px; margin: 2px 0;
+  font-style: italic; opacity: 0.8;
+}
+
 /* Composer */
 .composer {
   display: flex; gap: 10px; padding: 12px 20px; background: var(--card-bg);

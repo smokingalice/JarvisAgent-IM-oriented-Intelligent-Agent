@@ -91,3 +91,4 @@ class AgentRequest(BaseModel):
     message: str
     chat_id: str
     user_id: str = "alice"
+    mode: str = "full"

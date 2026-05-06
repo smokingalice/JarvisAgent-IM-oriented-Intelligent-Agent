@@ -21,11 +21,21 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   final _scrollCtrl = ScrollController();
   final _speechService = SpeechService();
   bool _speechReady = false;
+  String? _agentHint;
 
   @override
   void initState() {
     super.initState();
-    ref.read(messagesProvider.notifier).loadMessages(widget.chat.id);
+    final userId = ref.read(authProvider).user?.id ?? '';
+    final notifier = ref.read(messagesProvider.notifier);
+    notifier.setCurrentUser(userId);
+    notifier.setAgentHintCallback((hint) {
+      if (mounted) setState(() => _agentHint = hint);
+      Future.delayed(const Duration(seconds: 8), () {
+        if (mounted) setState(() => _agentHint = null);
+      });
+    });
+    notifier.loadMessages(widget.chat.id);
     _initSpeech();
   }
 
@@ -51,18 +61,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (text.isEmpty) return;
     _inputCtrl.clear();
 
-    final userId = ref.read(authProvider).user!.id;
     final notifier = ref.read(messagesProvider.notifier);
-
     await notifier.sendMessage(widget.chat.id, text);
-
-    // Check if should trigger agent
-    final isAgentChat = widget.chat.id.contains('agent');
-    final agentTriggers = ['帮我', '写', '生成', '创建', '做一', '总结', '整理', '修改', '改一下', '分享'];
-    final shouldTrigger = isAgentChat || agentTriggers.any((t) => text.contains(t));
-    if (shouldTrigger) {
-      await notifier.triggerAgent(widget.chat.id, text, userId);
-    }
 
     _scrollToBottom();
   }
@@ -92,6 +92,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
             ),
           ),
+          if (_agentHint != null)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              color: const Color(0xFFF5F3FF),
+              child: Text(
+                '✨ $_agentHint',
+                style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280), fontStyle: FontStyle.italic),
+              ),
+            ),
           _buildComposer(),
         ],
       ),

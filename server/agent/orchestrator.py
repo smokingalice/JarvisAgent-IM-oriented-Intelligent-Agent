@@ -311,3 +311,12 @@ class AgentOrchestrator:
             "type": "task_update",
             "data": {"task_id": task_id, **kwargs}
         })
+
+    def generate_quick_summary(self, message: str) -> str:
+        """Generate a brief one-line summary of the received message for inline hint display."""
+        text = message.strip()
+        if not text:
+            return ""
+        if len(text) <= 20:
+            return text
+        return text[:40] + ("..." if len(text) > 40 else "")
