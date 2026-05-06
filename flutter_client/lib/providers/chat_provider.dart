@@ -55,6 +55,8 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
   String? _chatId;
   String? _currentUserId;
   void Function(String)? _onAgentHint;
+  Timer? _summaryDebounce;
+  bool _summaryInFlight = false;
 
   MessagesNotifier(this._api, this._ws) : super([]);
 
@@ -85,10 +87,10 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
           if (!state.any((m) => m.id == newMsg.id)) {
             state = [...state, newMsg];
           }
-          // Trigger agent summary only for messages from others
+          // Trigger agent summary only for messages from others (debounced)
           final senderId = data['sender_id'] as String?;
           if (senderId != null && senderId != _currentUserId && senderId != 'agent') {
-            _triggerAgentSummary(data['chat_id'], data['content'] ?? '');
+            _debouncedAgentSummary(data['chat_id'], data['content'] ?? '');
           }
         }
       } else if (msg['type'] == 'message_recalled') {
@@ -98,7 +100,16 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     });
   }
 
+  void _debouncedAgentSummary(String chatId, String content) {
+    _summaryDebounce?.cancel();
+    _summaryDebounce = Timer(const Duration(milliseconds: 800), () {
+      _triggerAgentSummary(chatId, content);
+    });
+  }
+
   Future<void> _triggerAgentSummary(String chatId, String content) async {
+    if (_summaryInFlight) return;
+    _summaryInFlight = true;
     try {
       final res = await _api.post('/agent/chat', {
         'chat_id': chatId,
@@ -109,7 +120,10 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
       if (res is Map && res['summary'] != null) {
         _onAgentHint?.call(res['summary'] as String);
       }
-    } catch (_) {}
+    } catch (_) {
+    } finally {
+      _summaryInFlight = false;
+    }
   }
 
   Future<void> sendMessage(String chatId, String content) async {
@@ -119,6 +133,7 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
   @override
   void dispose() {
     _sub?.cancel();
+    _summaryDebounce?.cancel();
     super.dispose();
   }
 }
