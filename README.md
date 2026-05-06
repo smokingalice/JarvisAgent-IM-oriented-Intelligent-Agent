@@ -1,4 +1,4 @@
-# JarvisAgent
+# JarvisAgent v2.1
 
 基于 IM 的 AI 协同办公助手。在聊天中通过自然语言指令驱动 Agent 完成文档生成、PPT 制作、聊天总结等任务。
 
