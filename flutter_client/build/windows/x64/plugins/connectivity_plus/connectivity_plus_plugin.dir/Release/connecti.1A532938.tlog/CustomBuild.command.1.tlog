@@ -1,0 +1,10 @@
+^D:\TTWORK\JARVISAGENT-IM-ORIENTED-INTELLIGENT-AGENT\FLUTTER_CLIENT\WINDOWS\FLUTTER\EPHEMERAL\.PLUGIN_SYMLINKS\CONNECTIVITY_PLUS\WINDOWS\CMAKELISTS.TXT
+setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/plugins/connectivity_plus/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

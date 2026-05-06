@@ -1,0 +1,32 @@
+{
+  "assets": {},
+  "config": {
+    "build_asset_types": [
+      "code_assets/code"
+    ],
+    "extensions": {
+      "code_assets": {
+        "c_compiler": {
+          "ar": "D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\lib.exe",
+          "cc": "D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+          "ld": "D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\link.exe",
+          "windows": {
+            "developer_command_prompt": {
+              "arguments": [],
+              "script": "D:\\cpphelper\\VC\\Auxiliary\\Build\\vcvars64.bat"
+            }
+          }
+        },
+        "link_mode_preference": "dynamic",
+        "target_architecture": "x64",
+        "target_os": "windows"
+      }
+    },
+    "linking_enabled": true
+  },
+  "out_dir_shared": "D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\.dart_tool\\hooks_runner\\shared\\objective_c\\build\\",
+  "out_file": "D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\.dart_tool\\hooks_runner\\objective_c\\26ea49ad28\\output.json",
+  "package_name": "objective_c",
+  "package_root": "C:\\Users\\吴飞宏\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\objective_c-9.3.0\\",
+  "user_defines": {}
+}

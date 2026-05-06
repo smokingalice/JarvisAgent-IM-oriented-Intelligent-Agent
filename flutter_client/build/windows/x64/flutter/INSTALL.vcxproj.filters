@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\CMakeFiles\f17b4a79d0026a76770b46c632668363\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{899B7D4D-071E-356C-9957-3C4856DBAB6C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Profile|x64">
+      <Configuration>Profile</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{87416F1B-27AB-3EDE-A495-48A76CEE5693}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>jarvis_client</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">jarvis_client.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">jarvis_client</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\Profile\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">jarvis_client.dir\Profile\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">jarvis_client</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">jarvis_client.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">jarvis_client</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_HAS_EXCEPTIONS=0;_DEBUG;FLUTTER_VERSION="2.1.0+1";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"2.1.0+1\";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\flutter\Debug\flutter_wrapper_app.lib;dwmapi.lib;..\plugins\connectivity_plus\Debug\connectivity_plus_plugin.lib;..\plugins\speech_to_text_windows\Debug\speech_to_text_windows_plugin.lib;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Debug/jarvis_client.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Debug/jarvis_client.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Manifest>
+      <AdditionalManifestFiles>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION="2.1.0+1";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR="Profile"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"2.1.0+1\";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Profile\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\flutter\Profile\flutter_wrapper_app.lib;dwmapi.lib;..\plugins\connectivity_plus\Profile\connectivity_plus_plugin.lib;..\plugins\speech_to_text_windows\Profile\speech_to_text_windows_plugin.lib;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Profile/jarvis_client.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Profile/jarvis_client.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Manifest>
+      <AdditionalManifestFiles>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION="2.1.0+1";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_VERSION=\"2.1.0+1\";FLUTTER_VERSION_MAJOR=2;FLUTTER_VERSION_MINOR=1;FLUTTER_VERSION_PATCH=0;FLUTTER_VERSION_BUILD=1;NOMINMAX;UNICODE;_UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\connectivity_plus\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows\include;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\.plugin_symlinks\speech_to_text_windows\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\flutter\Release\flutter_wrapper_app.lib;dwmapi.lib;..\plugins\connectivity_plus\Release\connectivity_plus_plugin.lib;..\plugins\speech_to_text_windows\Release\speech_to_text_windows_plugin.lib;D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/jarvis_client.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/jarvis_client.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <Manifest>
+      <AdditionalManifestFiles>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\runner.exe.manifest;</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/runner/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/runner/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/runner/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\flutter_window.cpp" />
+    <ClCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\main.cpp" />
+    <ClCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\utils.cpp" />
+    <ClCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\win32_window.cpp" />
+    <ClCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\generated_plugin_registrant.cc" />
+    <ResourceCompile Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\runner\Runner.rc" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\ZERO_CHECK.vcxproj">
+      <Project>{5C0ADF2E-78E3-3EDE-BEEB-D6E3F870E943}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\plugins\connectivity_plus\connectivity_plus_plugin.vcxproj">
+      <Project>{1A532938-EC7C-3156-AB11-507715C7C4E8}</Project>
+      <Name>connectivity_plus_plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\flutter\flutter_assemble.vcxproj">
+      <Project>{E5682BB7-6FDA-39BA-81E8-1A40909DF1AB}</Project>
+      <Name>flutter_assemble</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\flutter\flutter_wrapper_app.vcxproj">
+      <Project>{1E50731F-E696-320E-924C-67BE6C804DBD}</Project>
+      <Name>flutter_wrapper_app</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\plugins\speech_to_text_windows\speech_to_text_windows_plugin.vcxproj">
+      <Project>{8B673264-8EB4-39FF-B3F9-7C632E611F3F}</Project>
+      <Name>speech_to_text_windows_plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,10 @@
+^D:\TTWORK\JARVISAGENT-IM-ORIENTED-INTELLIGENT-AGENT\FLUTTER_CLIENT\BUILD\WINDOWS\X64\CMAKEFILES\EECD08912DCEE820B69A92039D3DBA0F\GENERATE.STAMP.RULE
+setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/jarvis_client.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

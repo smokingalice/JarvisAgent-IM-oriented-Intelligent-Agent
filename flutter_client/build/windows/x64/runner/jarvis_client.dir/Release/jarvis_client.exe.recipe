@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\x64\Release\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\flutter\x64\Release\flutter_assemble</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\plugins\connectivity_plus\Release\connectivity_plus_plugin.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\plugins\speech_to_text_windows\Release\speech_to_text_windows_plugin.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\build\windows\x64\runner\Release\jarvis_client.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

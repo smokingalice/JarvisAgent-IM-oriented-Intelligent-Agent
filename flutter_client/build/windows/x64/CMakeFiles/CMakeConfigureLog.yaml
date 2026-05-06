@@ -1,0 +1,1681 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Windows - 10.0.26200 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/"
+    found: "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      閫傜敤浜?.NET Framework MSBuild 鐗堟湰 18.6.3+84d3e95b4
+      鐢熸垚鍚姩鏃堕棿涓?2026/5/5 19:25:34銆?
+      
+      鑺傜偣 1 涓婄殑椤圭洰鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.vcxproj鈥?榛樿鐩爣)銆?
+      PrepareForBuild:
+        姝ｅ湪鍒涘缓鐩綍鈥淒ebug\\鈥濄€?
+        宸插惎鐢ㄧ粨鏋勫寲杈撳嚭銆傜紪璇戝櫒璇婃柇鐨勬牸寮忚缃皢鍙嶆槧閿欒灞傛缁撴瀯銆傛湁鍏宠缁嗕俊鎭紝璇峰弬闃?https://aka.ms/cpp/structured-output銆?
+        姝ｅ湪鍒涘缓鐩綍鈥淒ebug\\CompilerIdCXX.tlog\\鈥濄€?
+      InitializeBuildStatus:
+        姝ｅ湪鍒涘缓鈥淒ebug\\CompilerIdCXX.tlog\\unsuccessfulbuild鈥濓紝鍥犱负宸叉寚瀹氣€淎lwaysCreate鈥濄€?
+        姝ｅ湪瀵光€淒ebug\\CompilerIdCXX.tlog\\unsuccessfulbuild鈥濇墽琛?Touch 浠诲姟銆?
+      ClCompile:
+        D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc145.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        姝ｅ湪鍒犻櫎鏂囦欢鈥淒ebug\\CompilerIdCXX.tlog\\unsuccessfulbuild鈥濄€?
+        姝ｅ湪瀵光€淒ebug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate鈥濇墽琛?Touch 浠诲姟銆?
+      宸插畬鎴愮敓鎴愰」鐩€淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.vcxproj鈥?榛樿鐩爣)鐨勬搷浣溿€?
+      
+      宸叉垚鍔熺敓鎴愩€?
+          0 涓鍛?
+          0 涓敊璇?
+      
+      宸茬敤鏃堕棿 00:00:03.16
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/4.2.3-msvc3/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.com"
+    found: "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.com"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.exe"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link"
+      - "C:/Python314/Scripts/lld-link.com"
+      - "C:/Python314/Scripts/lld-link.exe"
+      - "C:/Python314/Scripts/lld-link"
+      - "C:/Python314/lld-link.com"
+      - "C:/Python314/lld-link.exe"
+      - "C:/Python314/lld-link"
+      - "C:/Windows/System32/lld-link.com"
+      - "C:/Windows/System32/lld-link.exe"
+      - "C:/Windows/System32/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/System32/wbem/lld-link.com"
+      - "C:/Windows/System32/wbem/lld-link.exe"
+      - "C:/Windows/System32/wbem/lld-link"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/System32/OpenSSH/lld-link.com"
+      - "C:/Windows/System32/OpenSSH/lld-link.exe"
+      - "C:/Windows/System32/OpenSSH/lld-link"
+      - "C:/Program Files/dotnet/lld-link.com"
+      - "C:/Program Files/dotnet/lld-link.exe"
+      - "C:/Program Files/dotnet/lld-link"
+      - "C:/ProgramData/chocolatey/bin/lld-link.com"
+      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
+      - "C:/ProgramData/chocolatey/bin/lld-link"
+      - "C:/Program Files/nodejs/lld-link.com"
+      - "C:/Program Files/nodejs/lld-link.exe"
+      - "C:/Program Files/nodejs/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "D:/androidsdk/platform-tools/lld-link.com"
+      - "D:/androidsdk/platform-tools/lld-link.exe"
+      - "D:/androidsdk/platform-tools/lld-link"
+      - "D:/ndk/android-ndk-r29/lld-link.com"
+      - "D:/ndk/android-ndk-r29/lld-link.exe"
+      - "D:/ndk/android-ndk-r29/lld-link"
+      - "D:/fllutersdk/flutter/bin/lld-link.com"
+      - "D:/fllutersdk/flutter/bin/lld-link.exe"
+      - "D:/fllutersdk/flutter/bin/lld-link"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link"
+      - "D:/Trae CN/bin/lld-link.com"
+      - "D:/Trae CN/bin/lld-link.exe"
+      - "D:/Trae CN/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "D:/Microsoft VS Code/bin/lld-link.com"
+      - "D:/Microsoft VS Code/bin/lld-link.exe"
+      - "D:/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link.com"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link.exe"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link.com"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link.exe"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.com"
+    found: "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_MT"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mt"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt.com"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt.exe"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/mt"
+      - "C:/Python314/Scripts/mt.com"
+      - "C:/Python314/Scripts/mt.exe"
+      - "C:/Python314/Scripts/mt"
+      - "C:/Python314/mt.com"
+      - "C:/Python314/mt.exe"
+      - "C:/Python314/mt"
+      - "C:/Windows/System32/mt.com"
+      - "C:/Windows/System32/mt.exe"
+      - "C:/Windows/System32/mt"
+      - "C:/Windows/mt.com"
+      - "C:/Windows/mt.exe"
+      - "C:/Windows/mt"
+      - "C:/Windows/System32/wbem/mt.com"
+      - "C:/Windows/System32/wbem/mt.exe"
+      - "C:/Windows/System32/wbem/mt"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt"
+      - "C:/Windows/System32/OpenSSH/mt.com"
+      - "C:/Windows/System32/OpenSSH/mt.exe"
+      - "C:/Windows/System32/OpenSSH/mt"
+      - "C:/Program Files/dotnet/mt.com"
+      - "C:/Program Files/dotnet/mt.exe"
+      - "C:/Program Files/dotnet/mt"
+      - "C:/ProgramData/chocolatey/bin/mt.com"
+      - "C:/ProgramData/chocolatey/bin/mt.exe"
+      - "C:/ProgramData/chocolatey/bin/mt"
+      - "C:/Program Files/nodejs/mt.com"
+      - "C:/Program Files/nodejs/mt.exe"
+      - "C:/Program Files/nodejs/mt"
+      - "C:/Program Files/Git/cmd/mt.com"
+      - "C:/Program Files/Git/cmd/mt.exe"
+      - "C:/Program Files/Git/cmd/mt"
+      - "D:/androidsdk/platform-tools/mt.com"
+      - "D:/androidsdk/platform-tools/mt.exe"
+      - "D:/androidsdk/platform-tools/mt"
+      - "D:/ndk/android-ndk-r29/mt.com"
+      - "D:/ndk/android-ndk-r29/mt.exe"
+      - "D:/ndk/android-ndk-r29/mt"
+      - "D:/fllutersdk/flutter/bin/mt.com"
+      - "D:/fllutersdk/flutter/bin/mt.exe"
+      - "D:/fllutersdk/flutter/bin/mt"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt"
+      - "D:/Trae CN/bin/mt.com"
+      - "D:/Trae CN/bin/mt.exe"
+      - "D:/Trae CN/bin/mt"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/mt.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/mt.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/mt"
+      - "D:/Microsoft VS Code/bin/mt.com"
+      - "D:/Microsoft VS Code/bin/mt.exe"
+      - "D:/Microsoft VS Code/bin/mt"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/mt.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/mt.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/mt"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/mt.com"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/mt.exe"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/mt"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt.com"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/mt"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/mt.com"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/mt.exe"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/mt"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lib"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lib.com"
+    found: "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC.cmake:584 (enable_language)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC.cmake:557 (__windows_compiler_msvc_enable_rc)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCXXInformation.cmake:48 (include)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_RC_COMPILER"
+    description: "RC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "rc"
+    candidate_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/bin/"
+      - "C:/Program Files/jarvis_client/sbin/"
+      - "C:/Program Files/jarvis_client/"
+    searched_directories:
+      - "C:/Python314/Scripts/rc.com"
+      - "C:/Python314/Scripts/rc.exe"
+      - "C:/Python314/Scripts/rc"
+      - "C:/Python314/rc.com"
+      - "C:/Python314/rc.exe"
+      - "C:/Python314/rc"
+      - "C:/Windows/System32/rc.com"
+      - "C:/Windows/System32/rc.exe"
+      - "C:/Windows/System32/rc"
+      - "C:/Windows/rc.com"
+      - "C:/Windows/rc.exe"
+      - "C:/Windows/rc"
+      - "C:/Windows/System32/wbem/rc.com"
+      - "C:/Windows/System32/wbem/rc.exe"
+      - "C:/Windows/System32/wbem/rc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc"
+      - "C:/Windows/System32/OpenSSH/rc.com"
+      - "C:/Windows/System32/OpenSSH/rc.exe"
+      - "C:/Windows/System32/OpenSSH/rc"
+      - "C:/Program Files/dotnet/rc.com"
+      - "C:/Program Files/dotnet/rc.exe"
+      - "C:/Program Files/dotnet/rc"
+      - "C:/ProgramData/chocolatey/bin/rc.com"
+      - "C:/ProgramData/chocolatey/bin/rc.exe"
+      - "C:/ProgramData/chocolatey/bin/rc"
+      - "C:/Program Files/nodejs/rc.com"
+      - "C:/Program Files/nodejs/rc.exe"
+      - "C:/Program Files/nodejs/rc"
+      - "C:/Program Files/Git/cmd/rc.com"
+      - "C:/Program Files/Git/cmd/rc.exe"
+      - "C:/Program Files/Git/cmd/rc"
+      - "D:/androidsdk/platform-tools/rc.com"
+      - "D:/androidsdk/platform-tools/rc.exe"
+      - "D:/androidsdk/platform-tools/rc"
+      - "D:/ndk/android-ndk-r29/rc.com"
+      - "D:/ndk/android-ndk-r29/rc.exe"
+      - "D:/ndk/android-ndk-r29/rc"
+      - "D:/fllutersdk/flutter/bin/rc.com"
+      - "D:/fllutersdk/flutter/bin/rc.exe"
+      - "D:/fllutersdk/flutter/bin/rc"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc"
+      - "D:/Trae CN/bin/rc.com"
+      - "D:/Trae CN/bin/rc.exe"
+      - "D:/Trae CN/bin/rc"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/rc.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/rc.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/rc"
+      - "D:/Microsoft VS Code/bin/rc.com"
+      - "D:/Microsoft VS Code/bin/rc.exe"
+      - "D:/Microsoft VS Code/bin/rc"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/rc.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/rc.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/rc"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/rc.com"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/rc.exe"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/rc"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc.com"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/rc"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/rc.com"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/rc.exe"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/rc"
+      - "C:/Program Files/bin/rc.com"
+      - "C:/Program Files/bin/rc.exe"
+      - "C:/Program Files/bin/rc"
+      - "C:/Program Files/sbin/rc.com"
+      - "C:/Program Files/sbin/rc.exe"
+      - "C:/Program Files/sbin/rc"
+      - "C:/Program Files/rc.com"
+      - "C:/Program Files/rc.exe"
+      - "C:/Program Files/rc"
+      - "C:/Program Files (x86)/bin/rc.com"
+      - "C:/Program Files (x86)/bin/rc.exe"
+      - "C:/Program Files (x86)/bin/rc"
+      - "C:/Program Files (x86)/sbin/rc.com"
+      - "C:/Program Files (x86)/sbin/rc.exe"
+      - "C:/Program Files (x86)/sbin/rc"
+      - "C:/Program Files (x86)/rc.com"
+      - "C:/Program Files (x86)/rc.exe"
+      - "C:/Program Files (x86)/rc"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/rc"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/rc"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/rc"
+      - "C:/Program Files/jarvis_client/bin/rc.com"
+      - "C:/Program Files/jarvis_client/bin/rc.exe"
+      - "C:/Program Files/jarvis_client/bin/rc"
+      - "C:/Program Files/jarvis_client/sbin/rc.com"
+      - "C:/Program Files/jarvis_client/sbin/rc.exe"
+      - "C:/Program Files/jarvis_client/sbin/rc"
+      - "C:/Program Files/jarvis_client/rc.com"
+      - "C:/Program Files/jarvis_client/rc.exe"
+      - "C:/Program Files/jarvis_client/rc"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-5mmeo4"
+      binary: "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-5mmeo4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-5mmeo4'
+        
+        Run Build Command(s): D:/cpphelper/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_4f0ec.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        閫傜敤浜?.NET Framework MSBuild 鐗堟湰 18.6.3+84d3e95b4
+        鐢熸垚鍚姩鏃堕棿涓?2026/5/5 19:25:37銆?
+        
+        鑺傜偣 1 涓婄殑椤圭洰鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-5mmeo4\\cmTC_4f0ec.vcxproj鈥?榛樿鐩爣)銆?
+        PrepareForBuild:
+          宸插惎鐢ㄧ粨鏋勫寲杈撳嚭銆傜紪璇戝櫒璇婃柇鐨勬牸寮忚缃皢鍙嶆槧閿欒灞傛缁撴瀯銆傛湁鍏宠缁嗕俊鎭紝璇峰弬闃?https://aka.ms/cpp/structured-output銆?
+          姝ｅ湪鍒涘缓鐩綍鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-5mmeo4\\Debug\\鈥濄€?
+          姝ｅ湪鍒涘缓鐩綍鈥渃mTC_4f0ec.dir\\Debug\\cmTC_4f0ec.tlog\\鈥濄€?
+        InitializeBuildStatus:
+          姝ｅ湪鍒涘缓鈥渃mTC_4f0ec.dir\\Debug\\cmTC_4f0ec.tlog\\unsuccessfulbuild鈥濓紝鍥犱负宸叉寚瀹氣€淎lwaysCreate鈥濄€?
+          姝ｅ湪瀵光€渃mTC_4f0ec.dir\\Debug\\cmTC_4f0ec.tlog\\unsuccessfulbuild鈥濇墽琛?Touch 浠诲姟銆?
+        ClCompile:
+          D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_4f0ec.dir\\Debug\\\\" /Fd"cmTC_4f0ec.dir\\Debug\\vc145.pdb" /external:W3 /TP /errorReport:queue "D:\\cpphelper\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36241 for x64
+          鐗堟潈鎵€鏈?C) Microsoft Corporation銆備繚鐣欐墍鏈夋潈鍒┿€?
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_4f0ec.dir\\Debug\\\\" /Fd"cmTC_4f0ec.dir\\Debug\\vc145.pdb" /external:W3 /TP /errorReport:queue "D:\\cpphelper\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-5mmeo4\\Debug\\cmTC_4f0ec.exe" /INCREMENTAL /ILK:"cmTC_4f0ec.dir\\Debug\\cmTC_4f0ec.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-5mmeo4/Debug/cmTC_4f0ec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-5mmeo4/Debug/cmTC_4f0ec.lib" /MACHINE:X64  /machine:x64 cmTC_4f0ec.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_4f0ec.vcxproj -> D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-5mmeo4\\Debug\\cmTC_4f0ec.exe
+        FinalizeBuildStatus:
+          姝ｅ湪鍒犻櫎鏂囦欢鈥渃mTC_4f0ec.dir\\Debug\\cmTC_4f0ec.tlog\\unsuccessfulbuild鈥濄€?
+          姝ｅ湪瀵光€渃mTC_4f0ec.dir\\Debug\\cmTC_4f0ec.tlog\\cmTC_4f0ec.lastbuildstate鈥濇墽琛?Touch 浠诲姟銆?
+        宸插畬鎴愮敓鎴愰」鐩€淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-5mmeo4\\cmTC_4f0ec.vcxproj鈥?榛樿鐩爣)鐨勬搷浣溿€?
+        
+        宸叉垚鍔熺敓鎴愩€?
+            0 涓鍛?
+            0 涓敊璇?
+        
+        宸茬敤鏃堕棿 00:00:00.81
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.51.36241.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/"
+    found: "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      閫傜敤浜?.NET Framework MSBuild 鐗堟湰 18.6.3+84d3e95b4
+      鐢熸垚鍚姩鏃堕棿涓?2026/5/5 19:25:39銆?
+      
+      鑺傜偣 1 涓婄殑椤圭洰鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.vcxproj鈥?榛樿鐩爣)銆?
+      PrepareForBuild:
+        姝ｅ湪鍒涘缓鐩綍鈥淒ebug\\鈥濄€?
+        宸插惎鐢ㄧ粨鏋勫寲杈撳嚭銆傜紪璇戝櫒璇婃柇鐨勬牸寮忚缃皢鍙嶆槧閿欒灞傛缁撴瀯銆傛湁鍏宠缁嗕俊鎭紝璇峰弬闃?https://aka.ms/cpp/structured-output銆?
+        姝ｅ湪鍒涘缓鐩綍鈥淒ebug\\CompilerIdC.tlog\\鈥濄€?
+      InitializeBuildStatus:
+        姝ｅ湪鍒涘缓鈥淒ebug\\CompilerIdC.tlog\\unsuccessfulbuild鈥濓紝鍥犱负宸叉寚瀹氣€淎lwaysCreate鈥濄€?
+        姝ｅ湪瀵光€淒ebug\\CompilerIdC.tlog\\unsuccessfulbuild鈥濇墽琛?Touch 浠诲姟銆?
+      ClCompile:
+        D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc145.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        姝ｅ湪鍒犻櫎鏂囦欢鈥淒ebug\\CompilerIdC.tlog\\unsuccessfulbuild鈥濄€?
+        姝ｅ湪瀵光€淒ebug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate鈥濇墽琛?Touch 浠诲姟銆?
+      宸插畬鎴愮敓鎴愰」鐩€淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.vcxproj鈥?榛樿鐩爣)鐨勬搷浣溿€?
+      
+      宸叉垚鍔熺敓鎴愩€?
+          0 涓鍛?
+          0 涓敊璇?
+      
+      宸茬敤鏃堕棿 00:00:01.58
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/4.2.3-msvc3/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/"
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/bin/"
+      - "C:/Program Files/jarvis_client/sbin/"
+      - "C:/Program Files/jarvis_client/"
+    searched_directories:
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.com"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link.exe"
+      - "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/lld-link"
+      - "C:/Python314/Scripts/lld-link.com"
+      - "C:/Python314/Scripts/lld-link.exe"
+      - "C:/Python314/Scripts/lld-link"
+      - "C:/Python314/lld-link.com"
+      - "C:/Python314/lld-link.exe"
+      - "C:/Python314/lld-link"
+      - "C:/Windows/System32/lld-link.com"
+      - "C:/Windows/System32/lld-link.exe"
+      - "C:/Windows/System32/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/System32/wbem/lld-link.com"
+      - "C:/Windows/System32/wbem/lld-link.exe"
+      - "C:/Windows/System32/wbem/lld-link"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/System32/OpenSSH/lld-link.com"
+      - "C:/Windows/System32/OpenSSH/lld-link.exe"
+      - "C:/Windows/System32/OpenSSH/lld-link"
+      - "C:/Program Files/dotnet/lld-link.com"
+      - "C:/Program Files/dotnet/lld-link.exe"
+      - "C:/Program Files/dotnet/lld-link"
+      - "C:/ProgramData/chocolatey/bin/lld-link.com"
+      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
+      - "C:/ProgramData/chocolatey/bin/lld-link"
+      - "C:/Program Files/nodejs/lld-link.com"
+      - "C:/Program Files/nodejs/lld-link.exe"
+      - "C:/Program Files/nodejs/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "D:/androidsdk/platform-tools/lld-link.com"
+      - "D:/androidsdk/platform-tools/lld-link.exe"
+      - "D:/androidsdk/platform-tools/lld-link"
+      - "D:/ndk/android-ndk-r29/lld-link.com"
+      - "D:/ndk/android-ndk-r29/lld-link.exe"
+      - "D:/ndk/android-ndk-r29/lld-link"
+      - "D:/fllutersdk/flutter/bin/lld-link.com"
+      - "D:/fllutersdk/flutter/bin/lld-link.exe"
+      - "D:/fllutersdk/flutter/bin/lld-link"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.com"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.exe"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link"
+      - "D:/Trae CN/bin/lld-link.com"
+      - "D:/Trae CN/bin/lld-link.exe"
+      - "D:/Trae CN/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "D:/Microsoft VS Code/bin/lld-link.com"
+      - "D:/Microsoft VS Code/bin/lld-link.exe"
+      - "D:/Microsoft VS Code/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/lld-link"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link.com"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link.exe"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/lld-link"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.com"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.exe"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/lld-link"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link.com"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link.exe"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/lld-link"
+      - "C:/Program Files/bin/lld-link.com"
+      - "C:/Program Files/bin/lld-link.exe"
+      - "C:/Program Files/bin/lld-link"
+      - "C:/Program Files/sbin/lld-link.com"
+      - "C:/Program Files/sbin/lld-link.exe"
+      - "C:/Program Files/sbin/lld-link"
+      - "C:/Program Files/lld-link.com"
+      - "C:/Program Files/lld-link.exe"
+      - "C:/Program Files/lld-link"
+      - "C:/Program Files (x86)/bin/lld-link.com"
+      - "C:/Program Files (x86)/bin/lld-link.exe"
+      - "C:/Program Files (x86)/bin/lld-link"
+      - "C:/Program Files (x86)/sbin/lld-link.com"
+      - "C:/Program Files (x86)/sbin/lld-link.exe"
+      - "C:/Program Files (x86)/sbin/lld-link"
+      - "C:/Program Files (x86)/lld-link.com"
+      - "C:/Program Files (x86)/lld-link.exe"
+      - "C:/Program Files (x86)/lld-link"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/lld-link.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/lld-link.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/lld-link"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/lld-link.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/lld-link.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/sbin/lld-link"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/lld-link.com"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/lld-link.exe"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/lld-link"
+      - "C:/Program Files/jarvis_client/bin/lld-link.com"
+      - "C:/Program Files/jarvis_client/bin/lld-link.exe"
+      - "C:/Program Files/jarvis_client/bin/lld-link"
+      - "C:/Program Files/jarvis_client/sbin/lld-link.com"
+      - "C:/Program Files/jarvis_client/sbin/lld-link.exe"
+      - "C:/Program Files/jarvis_client/sbin/lld-link"
+      - "C:/Program Files/jarvis_client/lld-link.com"
+      - "C:/Program Files/jarvis_client/lld-link.exe"
+      - "C:/Program Files/jarvis_client/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-xgptnr"
+      binary: "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-xgptnr"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-xgptnr'
+        
+        Run Build Command(s): D:/cpphelper/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_b0aa0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        閫傜敤浜?.NET Framework MSBuild 鐗堟湰 18.6.3+84d3e95b4
+        鐢熸垚鍚姩鏃堕棿涓?2026/5/5 19:25:41銆?
+        
+        鑺傜偣 1 涓婄殑椤圭洰鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-xgptnr\\cmTC_b0aa0.vcxproj鈥?榛樿鐩爣)銆?
+        PrepareForBuild:
+          宸插惎鐢ㄧ粨鏋勫寲杈撳嚭銆傜紪璇戝櫒璇婃柇鐨勬牸寮忚缃皢鍙嶆槧閿欒灞傛缁撴瀯銆傛湁鍏宠缁嗕俊鎭紝璇峰弬闃?https://aka.ms/cpp/structured-output銆?
+          姝ｅ湪鍒涘缓鐩綍鈥淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-xgptnr\\Debug\\鈥濄€?
+          姝ｅ湪鍒涘缓鐩綍鈥渃mTC_b0aa0.dir\\Debug\\cmTC_b0aa0.tlog\\鈥濄€?
+        InitializeBuildStatus:
+          姝ｅ湪鍒涘缓鈥渃mTC_b0aa0.dir\\Debug\\cmTC_b0aa0.tlog\\unsuccessfulbuild鈥濓紝鍥犱负宸叉寚瀹氣€淎lwaysCreate鈥濄€?
+          姝ｅ湪瀵光€渃mTC_b0aa0.dir\\Debug\\cmTC_b0aa0.tlog\\unsuccessfulbuild鈥濇墽琛?Touch 浠诲姟銆?
+        ClCompile:
+          D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_b0aa0.dir\\Debug\\\\" /Fd"cmTC_b0aa0.dir\\Debug\\vc145.pdb" /external:W3 /TC /errorReport:queue "D:\\cpphelper\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36241 for x64
+          鐗堟潈鎵€鏈?C) Microsoft Corporation銆備繚鐣欐墍鏈夋潈鍒┿€?
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_b0aa0.dir\\Debug\\\\" /Fd"cmTC_b0aa0.dir\\Debug\\vc145.pdb" /external:W3 /TC /errorReport:queue "D:\\cpphelper\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          D:\\cpphelper\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-xgptnr\\Debug\\cmTC_b0aa0.exe" /INCREMENTAL /ILK:"cmTC_b0aa0.dir\\Debug\\cmTC_b0aa0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-xgptnr/Debug/cmTC_b0aa0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/CMakeFiles/CMakeScratch/TryCompile-xgptnr/Debug/cmTC_b0aa0.lib" /MACHINE:X64  /machine:x64 cmTC_b0aa0.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_b0aa0.vcxproj -> D:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-xgptnr\\Debug\\cmTC_b0aa0.exe
+        FinalizeBuildStatus:
+          姝ｅ湪鍒犻櫎鏂囦欢鈥渃mTC_b0aa0.dir\\Debug\\cmTC_b0aa0.tlog\\unsuccessfulbuild鈥濄€?
+          姝ｅ湪瀵光€渃mTC_b0aa0.dir\\Debug\\cmTC_b0aa0.tlog\\cmTC_b0aa0.lastbuildstate鈥濇墽琛?Touch 浠诲姟銆?
+        宸插畬鎴愮敓鎴愰」鐩€淒:\\ttwork\\JarvisAgent-IM-oriented-Intelligent-Agent\\flutter_client\\build\\windows\\x64\\CMakeFiles\\CMakeScratch\\TryCompile-xgptnr\\cmTC_b0aa0.vcxproj鈥?榛樿鐩爣)鐨勬搷浣溿€?
+        
+        宸叉垚鍔熺敓鎴愩€?
+            0 涓鍛?
+            0 涓敊璇?
+        
+        宸茬敤鏃堕棿 00:00:01.38
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:8 (project)"
+    message: |
+      Running the C compiler's linker: "D:/cpphelper/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.51.36241.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindJNI.cmake:538 (find_library)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:20 (find_package)"
+    mode: "library"
+    variable: "JAVA_JVM_LIBRARY"
+    description: "Java Virtual Machine library"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "jvm"
+    candidate_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/lib/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/lib/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/lib/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/lib/"
+      - "C:/Program Files/jarvis_client/"
+      - "C:/Program Files/jarvis_client/bin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "/bin/"
+    searched_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/lib/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/lib/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/lib/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/lib/"
+      - "C:/Program Files/jarvis_client/"
+      - "C:/Program Files/jarvis_client/bin/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
+      - "/bin/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "C:/Program Files/jarvis_client/bin"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindJNI.cmake:566 (find_path)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:20 (find_package)"
+    mode: "path"
+    variable: "JAVA_INCLUDE_PATH"
+    description: "JNI include directory"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "jni.h"
+    candidate_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/include/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/include/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/include/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/include/"
+      - "C:/Program Files/jarvis_client/"
+    searched_directories:
+      - "C:/Python314/Scripts/jni.h"
+      - "C:/Python314/jni.h"
+      - "C:/Windows/System32/jni.h"
+      - "C:/Windows/jni.h"
+      - "C:/Windows/System32/wbem/jni.h"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/jni.h"
+      - "C:/Windows/System32/OpenSSH/jni.h"
+      - "C:/Program Files/dotnet/jni.h"
+      - "C:/ProgramData/chocolatey/bin/jni.h"
+      - "C:/Program Files/nodejs/jni.h"
+      - "C:/Program Files/Git/cmd/jni.h"
+      - "D:/androidsdk/platform-tools/jni.h"
+      - "D:/ndk/android-ndk-r29/jni.h"
+      - "D:/fllutersdk/flutter/bin/jni.h"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/jni.h"
+      - "D:/Trae CN/bin/jni.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/jni.h"
+      - "D:/Microsoft VS Code/bin/jni.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/jni.h"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/jni.h"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/jni.h"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/jni.h"
+      - "C:/Program Files/include/jni.h"
+      - "C:/Program Files/jni.h"
+      - "C:/Program Files (x86)/include/jni.h"
+      - "C:/Program Files (x86)/jni.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/include/jni.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/jni.h"
+      - "C:/Program Files/jarvis_client/include/jni.h"
+      - "C:/Program Files/jarvis_client/jni.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindJNI.cmake:606 (find_path)"
+      - "flutter/ephemeral/.plugin_symlinks/jni/src/CMakeLists.txt:20 (find_package)"
+    mode: "path"
+    variable: "JAVA_INCLUDE_PATH2"
+    description: "jni_md.h jniport.h include directory"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "jni_md.h"
+      - "jniport.h"
+    candidate_directories:
+      - "C:/Python314/Scripts/"
+      - "C:/Python314/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Program Files/Git/cmd/"
+      - "D:/androidsdk/platform-tools/"
+      - "D:/ndk/android-ndk-r29/"
+      - "D:/fllutersdk/flutter/bin/"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "D:/Trae CN/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/"
+      - "D:/Microsoft VS Code/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/"
+      - "C:/Program Files/include/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/include/"
+      - "C:/Program Files (x86)/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/include/"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/"
+      - "C:/Program Files/jarvis_client/include/"
+      - "C:/Program Files/jarvis_client/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/darwin/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/win32/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/linux/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/freebsd/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/openbsd/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/solaris/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/hp-ux/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/alpha/"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/aix/"
+    searched_directories:
+      - "C:/Python314/Scripts/jni_md.h"
+      - "C:/Python314/jni_md.h"
+      - "C:/Windows/System32/jni_md.h"
+      - "C:/Windows/jni_md.h"
+      - "C:/Windows/System32/wbem/jni_md.h"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/jni_md.h"
+      - "C:/Windows/System32/OpenSSH/jni_md.h"
+      - "C:/Program Files/dotnet/jni_md.h"
+      - "C:/ProgramData/chocolatey/bin/jni_md.h"
+      - "C:/Program Files/nodejs/jni_md.h"
+      - "C:/Program Files/Git/cmd/jni_md.h"
+      - "D:/androidsdk/platform-tools/jni_md.h"
+      - "D:/ndk/android-ndk-r29/jni_md.h"
+      - "D:/fllutersdk/flutter/bin/jni_md.h"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/jni_md.h"
+      - "D:/Trae CN/bin/jni_md.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/jni_md.h"
+      - "D:/Microsoft VS Code/bin/jni_md.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/jni_md.h"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/jni_md.h"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/jni_md.h"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/jni_md.h"
+      - "C:/Program Files/include/jni_md.h"
+      - "C:/Program Files/jni_md.h"
+      - "C:/Program Files (x86)/include/jni_md.h"
+      - "C:/Program Files (x86)/jni_md.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/include/jni_md.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/jni_md.h"
+      - "C:/Program Files/jarvis_client/include/jni_md.h"
+      - "C:/Program Files/jarvis_client/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/darwin/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/win32/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/linux/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/freebsd/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/openbsd/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/solaris/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/hp-ux/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/alpha/jni_md.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/aix/jni_md.h"
+      - "C:/Python314/Scripts/jniport.h"
+      - "C:/Python314/jniport.h"
+      - "C:/Windows/System32/jniport.h"
+      - "C:/Windows/jniport.h"
+      - "C:/Windows/System32/wbem/jniport.h"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/jniport.h"
+      - "C:/Windows/System32/OpenSSH/jniport.h"
+      - "C:/Program Files/dotnet/jniport.h"
+      - "C:/ProgramData/chocolatey/bin/jniport.h"
+      - "C:/Program Files/nodejs/jniport.h"
+      - "C:/Program Files/Git/cmd/jniport.h"
+      - "D:/androidsdk/platform-tools/jniport.h"
+      - "D:/ndk/android-ndk-r29/jniport.h"
+      - "D:/fllutersdk/flutter/bin/jniport.h"
+      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/jniport.h"
+      - "D:/Trae CN/bin/jniport.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Local/Microsoft/WindowsApps/jniport.h"
+      - "D:/Microsoft VS Code/bin/jniport.h"
+      - "C:/Users/\u5434\u98de\u5b8f/AppData/Roaming/npm/jniport.h"
+      - "D:/IntelliJ IDEA Community Edition 2023.1.3/bin/jniport.h"
+      - "C:/Users/\u5434\u98de\u5b8f/.vscode/extensions/ms-python.debugpy-2026.6.0-win32-x64/bundled/scripts/noConfigScripts/jniport.h"
+      - "D:/fllutersdk/flutter/bin/mingit/cmd/jniport.h"
+      - "C:/Program Files/include/jniport.h"
+      - "C:/Program Files/jniport.h"
+      - "C:/Program Files (x86)/include/jniport.h"
+      - "C:/Program Files (x86)/jniport.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/include/jniport.h"
+      - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/jniport.h"
+      - "C:/Program Files/jarvis_client/include/jniport.h"
+      - "C:/Program Files/jarvis_client/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/darwin/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/win32/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/linux/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/freebsd/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/openbsd/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/solaris/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/hp-ux/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/alpha/jniport.h"
+      - "D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows/flutter/ephemeral/.plugin_symlinks/jni/src/JAVA_INCLUDE_PATH-NOTFOUND/aix/jniport.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "D:\\androidsdk\\platform-tools"
+        - "D:\\ndk\\android-ndk-r29"
+        - "D:\\fllutersdk\\flutter\\bin"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "d:\\Trae CN\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "D:\\Microsoft VS Code\\bin"
+        - "C:\\Users\\\u5434\u98de\u5b8f\\AppData\\Roaming\\npm"
+        - "D:\\IntelliJ IDEA Community Edition 2023.1.3\\bin"
+        - "c:\\Users\\\u5434\u98de\u5b8f\\.vscode\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+        - "D:\\fllutersdk\\flutter\\bin\\mingit\\cmd"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/jarvis_client"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "D:/cpphelper/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files/jarvis_client"
+...

@@ -1,0 +1,13 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/flutter/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/plugins/connectivity_plus/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/plugins/speech_to_text_windows/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/plugins/jni/cmake_install.cmake",
+		"D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/plugins/jni/shared/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,13 @@
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/icudtl.dat
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/flutter_windows.dll
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/connectivity_plus_plugin.dll
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/speech_to_text_windows_plugin.dll
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/AssetManifest.bin
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/FontManifest.json
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/NativeAssetsManifest.json
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/NOTICES.Z
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/shaders/ink_sparkle.frag
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/flutter_assets/shaders/stretch_effect.frag
+D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/runner/Release/data/app.so

@@ -1,0 +1,28 @@
+^D:\TTWORK\JARVISAGENT-IM-ORIENTED-INTELLIGENT-AGENT\FLUTTER_CLIENT\BUILD\WINDOWS\X64\CMAKEFILES\0631288B6E023562153CE59BE33B3915\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -E env FLUTTER_ROOT=D:\fllutersdk\flutter PROJECT_DIR=D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client FLUTTER_ROOT=D:\fllutersdk\flutter FLUTTER_EPHEMERAL_DIR=D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\windows\flutter\ephemeral PROJECT_DIR=D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client FLUTTER_TARGET=lib\main.dart DART_DEFINES=RkxVVFRFUl9WRVJTSU9OPTMuNDEuNQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049MmM5ZWIyMDczOQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049MDUyZjMxZDExNQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMS4z DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=true PACKAGE_CONFIG=D:\ttwork\JarvisAgent-IM-oriented-Intelligent-Agent\flutter_client\.dart_tool\package_config.json D:/fllutersdk/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Release
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\TTWORK\JARVISAGENT-IM-ORIENTED-INTELLIGENT-AGENT\FLUTTER_CLIENT\BUILD\WINDOWS\X64\CMAKEFILES\F17B4A79D0026A76770B46C632668363\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\TTWORK\JARVISAGENT-IM-ORIENTED-INTELLIGENT-AGENT\FLUTTER_CLIENT\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+D:\cpphelper\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/windows -BD:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64 --check-stamp-file D:/ttwork/JarvisAgent-IM-oriented-Intelligent-Agent/flutter_client/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
