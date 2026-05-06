@@ -13,23 +13,29 @@ class ApiService {
       };
 
   Future<dynamic> get(String path) async {
-    final resp = await http.get(Uri.parse('${AppConfig.apiBase}$path'), headers: _headers);
+    final resp = await http
+        .get(Uri.parse('${AppConfig.apiBase}$path'), headers: _headers)
+        .timeout(AppConfig.httpTimeout);
     if (resp.statusCode == 200) return jsonDecode(resp.body);
     throw ApiException(resp.statusCode, resp.body);
   }
 
   Future<dynamic> post(String path, Map<String, dynamic> body) async {
-    final resp = await http.post(
-      Uri.parse('${AppConfig.apiBase}$path'),
-      headers: _headers,
-      body: jsonEncode(body),
-    );
+    final resp = await http
+        .post(
+          Uri.parse('${AppConfig.apiBase}$path'),
+          headers: _headers,
+          body: jsonEncode(body),
+        )
+        .timeout(AppConfig.httpTimeout);
     if (resp.statusCode == 200) return jsonDecode(resp.body);
     throw ApiException(resp.statusCode, resp.body);
   }
 
   Future<dynamic> delete(String path) async {
-    final resp = await http.delete(Uri.parse('${AppConfig.apiBase}$path'), headers: _headers);
+    final resp = await http
+        .delete(Uri.parse('${AppConfig.apiBase}$path'), headers: _headers)
+        .timeout(AppConfig.httpTimeout);
     if (resp.statusCode == 200) return jsonDecode(resp.body);
     throw ApiException(resp.statusCode, resp.body);
   }
