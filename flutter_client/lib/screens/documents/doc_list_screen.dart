@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/document_provider.dart';
 import '../../models/document.dart';
+import '../../utils/time_utils.dart';
 import 'doc_view_screen.dart';
 
 class DocListScreen extends ConsumerWidget {
@@ -31,7 +32,7 @@ class _DocTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final time = doc.updatedAt.length >= 16 ? doc.updatedAt.substring(0, 16) : doc.updatedAt;
+    final time = TimeUtils.toLocalFullDisplay(doc.updatedAt);
     final preview = doc.content.length > 60 ? '${doc.content.substring(0, 60)}...' : doc.content;
 
     return ListTile(

@@ -78,6 +78,11 @@ async def chat_websocket(websocket: WebSocket, chat_id: str, token: str = Query(
         manager.disconnect(websocket, f"chat:{chat_id}", user_id=user_id)
 
 
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok"}
+
+
 app.mount("/static", StaticFiles(directory=PUBLIC_DIR), name="static")
 
 

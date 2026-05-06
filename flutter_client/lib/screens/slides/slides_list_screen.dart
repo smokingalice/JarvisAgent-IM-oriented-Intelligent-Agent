@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/document_provider.dart';
 import '../../models/presentation.dart';
+import '../../utils/time_utils.dart';
 import 'slides_view_screen.dart';
 
 class SlidesListScreen extends ConsumerWidget {
@@ -31,7 +32,7 @@ class _SlideTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final time = pres.updatedAt.length >= 16 ? pres.updatedAt.substring(0, 16) : pres.updatedAt;
+    final time = TimeUtils.toLocalFullDisplay(pres.updatedAt);
     final slideCount = pres.slides.length;
 
     return ListTile(

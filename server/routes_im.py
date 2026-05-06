@@ -183,10 +183,15 @@ async def recall_message(message_id: str, user_id: str = Query(default=None), au
     await db.execute("UPDATE messages SET recalled_at = %s WHERE id = %s", (now, message_id))
     await db.commit()
 
-    await manager.broadcast({
+    chat_id = msg["chat_id"]
+    cursor = await db.execute("SELECT user_id FROM chat_members WHERE chat_id = %s", (chat_id,))
+    member_rows = await cursor.fetchall()
+    member_ids = [r["user_id"] for r in member_rows]
+
+    await manager.broadcast_to_chat_members(chat_id, {
         "type": "message_recalled",
-        "data": {"message_id": message_id, "chat_id": msg["chat_id"]},
-    })
+        "data": {"message_id": message_id, "chat_id": chat_id},
+    }, member_ids)
 
     await db.close()
     return {"status": "ok"}

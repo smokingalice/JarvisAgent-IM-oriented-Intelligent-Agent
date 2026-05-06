@@ -87,7 +87,9 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
     ref.read(chatListProvider.notifier).load();
     ref.read(chatListProvider.notifier).listenWs();
     ref.read(documentListProvider.notifier).load();
+    ref.read(documentListProvider.notifier).listenWs();
     ref.read(presentationListProvider.notifier).load();
+    ref.read(presentationListProvider.notifier).listenWs();
   }
 
   @override

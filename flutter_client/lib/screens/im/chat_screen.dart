@@ -56,11 +56,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
     await notifier.sendMessage(widget.chat.id, text);
 
-    // Check if should trigger agent
     final isAgentChat = widget.chat.id.contains('agent');
-    final agentTriggers = ['帮我', '写', '生成', '创建', '做一', '总结', '整理', '修改', '改一下', '分享'];
-    final shouldTrigger = isAgentChat || agentTriggers.any((t) => text.contains(t));
-    if (shouldTrigger) {
+    if (isAgentChat) {
       await notifier.triggerAgent(widget.chat.id, text, userId);
     }
 

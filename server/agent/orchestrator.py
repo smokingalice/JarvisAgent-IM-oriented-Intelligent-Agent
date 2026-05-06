@@ -69,11 +69,13 @@ class AgentOrchestrator:
 
             await self._update_task(task_id, status="completed", progress=100, result=results)
 
-            delivery_msg = self._format_delivery(results)
+            delivery_msg = self._format_delivery(results, plan)
             await self._send_agent_message(chat_id, delivery_msg, msg_type="agent_card", card_data={
                 "type": "delivery",
                 "task_id": task_id,
                 "results": results,
+                "mode": plan.get("_mode", "unknown"),
+                "model": plan.get("_model", ""),
             })
 
         except Exception as e:
@@ -212,6 +214,15 @@ class AgentOrchestrator:
     def _format_plan_summary(self, plan: dict) -> str:
         lines = [f"好的，我来帮你完成这个任务。\n"]
         lines.append(f"**目标**：{plan.get('intent', '执行任务')}\n")
+
+        mode = plan.get("_mode", "unknown")
+        if mode == "ai":
+            model = plan.get("_model", "")
+            lines.append(f"🧠 *使用 AI 模型: {model}*\n")
+        elif mode == "fallback":
+            reason = plan.get("_mode_reason", "")
+            lines.append(f"⚡ *降级模式（关键词匹配）- {reason}*\n")
+
         lines.append("**执行计划**：")
         for i, task in enumerate(plan.get("tasks", []), 1):
             icon = "📄" if "doc" in task.get("tool", "") else "📊" if "slide" in task.get("tool", "") else "🔧"
@@ -219,7 +230,7 @@ class AgentOrchestrator:
         lines.append("\n正在执行中...")
         return "\n".join(lines)
 
-    def _format_delivery(self, results: dict) -> str:
+    def _format_delivery(self, results: dict, plan: dict = None) -> str:
         lines = ["✅ **任务完成！**\n\n以下是本次工作成果：\n"]
         artifacts = results.get("artifacts", [])
         for art in artifacts:
@@ -272,6 +283,10 @@ class AgentOrchestrator:
             VALUES (%s, %s, 'agent', %s, %s, %s, %s)
         """, (msg_id, chat_id, content, msg_type, card_json, now))
         await db.commit()
+
+        cursor = await db.execute("SELECT user_id FROM chat_members WHERE chat_id = %s", (chat_id,))
+        member_rows = await cursor.fetchall()
+        member_ids = [r["user_id"] for r in member_rows]
         await db.close()
 
         message = {
@@ -284,7 +299,7 @@ class AgentOrchestrator:
             "created_at": now,
             "recalled_at": None,
         }
-        await manager.broadcast({"type": "new_message", "data": message})
+        await manager.broadcast_to_chat_members(chat_id, {"type": "new_message", "data": message}, member_ids)
 
     async def _update_task(self, task_id: str, **kwargs):
         db = await get_db()

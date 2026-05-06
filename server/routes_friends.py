@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query
 from database import get_db
 from routes_auth import get_current_user
 from ws_manager import manager
@@ -50,7 +50,7 @@ async def list_friend_requests(user_id: str = Depends(get_current_user)):
 
 
 @router.post("/friends/request")
-async def send_friend_request(target_user_id: str, user_id: str = Depends(get_current_user)):
+async def send_friend_request(target_user_id: str = Query(default=None), user_id: str = Depends(get_current_user)):
     if target_user_id == user_id:
         raise HTTPException(status_code=400, detail="Cannot add yourself")
     if target_user_id == "agent":

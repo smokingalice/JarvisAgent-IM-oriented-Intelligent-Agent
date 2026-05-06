@@ -48,7 +48,10 @@ class Planner:
 
     async def create_plan(self, message: str, chat_id: str, user_id: str, context: dict = None) -> dict:
         if not self.client:
-            return self._fallback_plan(message, context)
+            plan = self._fallback_plan(message, context)
+            plan["_mode"] = "fallback"
+            plan["_mode_reason"] = "未配置 API Key"
+            return plan
 
         try:
             context_str = ""
@@ -71,9 +74,15 @@ class Planner:
             text = response.content[0].text.strip()
             if text.startswith("```"):
                 text = text.split("\n", 1)[1].rsplit("```", 1)[0]
-            return json.loads(text)
-        except Exception:
-            return self._fallback_plan(message, context)
+            plan = json.loads(text)
+            plan["_mode"] = "ai"
+            plan["_model"] = ANTHROPIC_MODEL
+            return plan
+        except Exception as e:
+            plan = self._fallback_plan(message, context)
+            plan["_mode"] = "fallback"
+            plan["_mode_reason"] = f"AI 调用失败: {str(e)[:100]}"
+            return plan
 
     def _fallback_plan(self, message: str, context: dict = None) -> dict:
         """Fallback when no API key or API call fails — use keyword matching."""

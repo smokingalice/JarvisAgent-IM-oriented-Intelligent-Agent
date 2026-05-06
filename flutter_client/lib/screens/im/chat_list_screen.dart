@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/chat_provider.dart';
 import '../../models/chat.dart';
+import '../../utils/time_utils.dart';
 import 'chat_screen.dart';
 
 class ChatListScreen extends ConsumerWidget {
@@ -34,7 +35,7 @@ class _ChatTile extends StatelessWidget {
     final isAgent = chat.id.contains('agent');
     final preview = chat.lastMessage?.content ?? '';
     final time = chat.lastMessage?.createdAt ?? '';
-    final timeStr = time.length >= 16 ? time.substring(11, 16) : '';
+    final timeStr = TimeUtils.toLocalDisplay(time);
 
     return ListTile(
       leading: CircleAvatar(
