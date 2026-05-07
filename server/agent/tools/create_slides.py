@@ -99,16 +99,18 @@ async def _generate_slides(title: str, num_slides: int, source_content: str, sou
 
         response = await client.chat.completions.create(
             model=ARK_MODEL,
-            max_tokens=4096,
+            max_tokens=8192,
             messages=[
                 {"role": "system", "content": SLIDES_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
             ],
         )
         text = response.choices[0].message.content.strip()
-        if text.startswith("```"):
-            text = text.split("\n", 1)[1].rsplit("```", 1)[0]
-        return json.loads(text)
+        text = _clean_json_text(text)
+        slides = json.loads(text)
+        if not isinstance(slides, list):
+            raise ValueError("Expected a JSON array")
+        return slides
     except Exception:
         return _fallback_slides(title, num_slides)
 
