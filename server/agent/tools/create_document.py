@@ -1,8 +1,8 @@
 import uuid
 import json
 from datetime import datetime
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 from database import get_db
 from ws_manager import manager
 
@@ -54,11 +54,11 @@ async def create_document_tool(params: dict, chat_id: str = "") -> dict:
 
 
 async def _generate_document_content(title: str, outline: list, tone: str, source_message: str) -> str:
-    if not ANTHROPIC_API_KEY:
+    if not ARK_API_KEY:
         return _fallback_content(title, outline)
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
+        client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL)
 
         tone_desc = {"formal": "正式专业", "casual": "轻松口语化", "technical": "技术文档风格"}.get(tone, "正式专业")
 
@@ -71,13 +71,15 @@ async def _generate_document_content(title: str, outline: list, tone: str, sourc
 
 请按照大纲逐章节撰写完整内容。"""
 
-        response = await client.messages.create(
-            model=ANTHROPIC_MODEL,
+        response = await client.chat.completions.create(
+            model=ARK_MODEL,
             max_tokens=4096,
-            system=DOC_SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": DOC_SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        return response.content[0].text
+        return response.choices[0].message.content
     except Exception:
         return _fallback_content(title, outline)
 

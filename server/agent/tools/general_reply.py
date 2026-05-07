@@ -1,11 +1,11 @@
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 
 
 async def general_reply_tool(params: dict, chat_id: str = "") -> dict:
     message = params.get("message", "")
 
-    if not ANTHROPIC_API_KEY:
+    if not ARK_API_KEY:
         return {
             "message": "收到你的消息。我是 JarvisAgent，可以帮你生成文档、制作PPT、总结聊天内容等。试试对我说「帮我写一份产品方案」？",
             "_mode": "fallback",
@@ -13,19 +13,21 @@ async def general_reply_tool(params: dict, chat_id: str = "") -> dict:
         }
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
-        response = await client.messages.create(
-            model=ANTHROPIC_MODEL,
+        client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL)
+        response = await client.chat.completions.create(
+            model=ARK_MODEL,
             max_tokens=1024,
-            system="""你是 JarvisAgent，一个 AI 协同办公助手。你可以帮用户：
+            messages=[
+                {"role": "system", "content": """你是 JarvisAgent，一个 AI 协同办公助手。你可以帮用户：
 1. 生成文档（方案、报告、文章等）
 2. 制作演示稿/PPT
 3. 总结聊天讨论
 
-保持回复简洁友好，如果用户的意图不明确，主动引导他们使用你的能力。""",
-            messages=[{"role": "user", "content": message}],
+保持回复简洁友好，如果用户的意图不明确，主动引导他们使用你的能力。"""},
+                {"role": "user", "content": message},
+            ],
         )
-        return {"message": response.content[0].text, "_mode": "ai", "_model": ANTHROPIC_MODEL}
+        return {"message": response.choices[0].message.content, "_mode": "ai", "_model": ARK_MODEL}
     except Exception as e:
         return {
             "message": "我是 JarvisAgent，你的 AI 协同助手。有什么我可以帮你的吗？比如生成文档、制作PPT或者总结讨论内容。",

@@ -6,6 +6,11 @@ load_dotenv()
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 ANTHROPIC_BASE_URL = os.getenv("ANTHROPIC_BASE_URL", None)
 ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
+
+# Ark (火山引擎) uses OpenAI-compatible API
+ARK_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+ARK_BASE_URL = os.getenv("ANTHROPIC_BASE_URL", None)
+ARK_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
 HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", "8000"))
 JWT_SECRET = os.getenv("JWT_SECRET", "jarvis-agent-dev-secret-2026")

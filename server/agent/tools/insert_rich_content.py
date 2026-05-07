@@ -1,8 +1,8 @@
 import uuid
 import json
 from datetime import datetime
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 from database import get_db
 from ws_manager import manager
 
@@ -81,19 +81,21 @@ async def insert_rich_content_tool(params: dict, chat_id: str = "") -> dict:
 
 
 async def _generate_rich_content(action: str, instruction: str) -> str:
-    if not ANTHROPIC_API_KEY:
+    if not ARK_API_KEY:
         return _fallback_rich_content(action, instruction)
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
+        client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL)
         prompt = f"Action: {action}\nInstruction: {instruction}\n\nGenerate the appropriate Markdown content."
-        response = await client.messages.create(
-            model=ANTHROPIC_MODEL,
+        response = await client.chat.completions.create(
+            model=ARK_MODEL,
             max_tokens=2048,
-            system=RICH_CONTENT_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": RICH_CONTENT_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        return response.content[0].text
+        return response.choices[0].message.content
     except Exception:
         return _fallback_rich_content(action, instruction)
 

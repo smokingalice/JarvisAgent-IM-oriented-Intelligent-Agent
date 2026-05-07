@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 from database import get_db
 from ws_manager import manager
 
@@ -72,11 +72,11 @@ async def edit_slides_tool(params: dict, chat_id: str = "") -> dict:
 
 
 async def _apply_slides_edit(slides: list, instruction: str, action: str, slide_id: str = None) -> list:
-    if not ANTHROPIC_API_KEY:
+    if not ARK_API_KEY:
         return slides
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
+        client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL)
         prompt = f"""请根据以下指令修改演示稿：
 
 修改指令：{instruction}
@@ -86,13 +86,15 @@ async def _apply_slides_edit(slides: list, instruction: str, action: str, slide_
 当前演示稿内容：
 {json.dumps(slides, ensure_ascii=False, indent=2)[:3000]}"""
 
-        response = await client.messages.create(
-            model=ANTHROPIC_MODEL,
+        response = await client.chat.completions.create(
+            model=ARK_MODEL,
             max_tokens=4096,
-            system=EDIT_SLIDES_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": EDIT_SLIDES_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        text = response.content[0].text.strip()
+        text = response.choices[0].message.content.strip()
         if text.startswith("```"):
             text = text.split("\n", 1)[1].rsplit("```", 1)[0]
         return json.loads(text)

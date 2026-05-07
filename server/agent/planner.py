@@ -1,6 +1,6 @@
 import json
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 
 SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
@@ -44,7 +44,7 @@ SYSTEM_PROMPT = """你是 JarvisAgent 的任务规划器。
 
 class Planner:
     def __init__(self):
-        self.client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL) if ANTHROPIC_API_KEY else None
+        self.client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL) if ARK_API_KEY else None
 
     async def create_plan(self, message: str, chat_id: str, user_id: str, context: dict = None) -> dict:
         if not self.client:
@@ -65,18 +65,20 @@ class Planner:
                     f"{a['title']}({a['type']})" for a in context["recent_artifacts"]
                 )
 
-            response = await self.client.messages.create(
-                model=ANTHROPIC_MODEL,
+            response = await self.client.chat.completions.create(
+                model=ARK_MODEL,
                 max_tokens=2048,
-                system=SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": message + context_str}],
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": message + context_str},
+                ],
             )
-            text = response.content[0].text.strip()
+            text = response.choices[0].message.content.strip()
             if text.startswith("```"):
                 text = text.split("\n", 1)[1].rsplit("```", 1)[0]
             plan = json.loads(text)
             plan["_mode"] = "ai"
-            plan["_model"] = ANTHROPIC_MODEL
+            plan["_model"] = ARK_MODEL
             return plan
         except Exception as e:
             plan = self._fallback_plan(message, context)

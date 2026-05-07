@@ -1,8 +1,8 @@
 import uuid
 import json
 from datetime import datetime
-from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
+from openai import AsyncOpenAI
+from config import ARK_API_KEY, ARK_BASE_URL, ARK_MODEL
 from database import get_db
 from ws_manager import manager
 
@@ -82,11 +82,11 @@ async def create_slides_tool(params: dict, chat_id: str = "") -> dict:
 
 
 async def _generate_slides(title: str, num_slides: int, source_content: str, source_message: str) -> list:
-    if not ANTHROPIC_API_KEY:
+    if not ARK_API_KEY:
         return _fallback_slides(title, num_slides)
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
+        client = AsyncOpenAI(api_key=ARK_API_KEY, base_url=ARK_BASE_URL)
         prompt = f"""请为以下演示稿生成 {num_slides} 页幻灯片内容：
 
 标题：{title}
@@ -97,13 +97,15 @@ async def _generate_slides(title: str, num_slides: int, source_content: str, sou
         if source_message:
             prompt += f"\n用户原始需求：{source_message}"
 
-        response = await client.messages.create(
-            model=ANTHROPIC_MODEL,
+        response = await client.chat.completions.create(
+            model=ARK_MODEL,
             max_tokens=4096,
-            system=SLIDES_SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": SLIDES_SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        text = response.content[0].text.strip()
+        text = response.choices[0].message.content.strip()
         if text.startswith("```"):
             text = text.split("\n", 1)[1].rsplit("```", 1)[0]
         return json.loads(text)
