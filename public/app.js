@@ -2,25 +2,137 @@ const API_BASE = '';
 const WS_BASE = `ws://${location.host}`;
 
 const state = {
-  currentUser: 'alice',
+  token: localStorage.getItem('jarvis_token') || null,
+  currentUser: JSON.parse(localStorage.getItem('jarvis_user') || 'null'),
   activeChat: null,
   chats: [],
   messages: [],
   documents: [],
   presentations: [],
+  friends: [],
   ws: null,
 };
 
 // ==================== Init ====================
 document.addEventListener('DOMContentLoaded', () => {
+  if (state.token && state.currentUser) {
+    showMainApp();
+  } else {
+    showAuthPage();
+  }
+});
+
+// ==================== Auth ====================
+function showAuthPage() {
+  document.getElementById('auth-page').style.display = 'flex';
+  document.getElementById('main-app').style.display = 'none';
+}
+
+function showMainApp() {
+  document.getElementById('auth-page').style.display = 'none';
+  document.getElementById('main-app').style.display = 'flex';
+  document.getElementById('nav-username').textContent = state.currentUser.name || state.currentUser.id;
   initNav();
-  initUserSelect();
   initComposer();
+  initVoiceInput();
   connectWebSocket();
   loadChats();
   loadDocuments();
   loadPresentations();
-});
+  loadFriends();
+  loadFriendRequests();
+}
+
+function showLogin() {
+  document.getElementById('auth-form-login').style.display = 'block';
+  document.getElementById('auth-form-register').style.display = 'none';
+}
+
+function showRegister() {
+  document.getElementById('auth-form-login').style.display = 'none';
+  document.getElementById('auth-form-register').style.display = 'block';
+}
+
+async function doLogin() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  errorEl.style.display = 'none';
+
+  if (!username || !password) { errorEl.textContent = '请填写用户名和密码'; errorEl.style.display = 'block'; return; }
+
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      errorEl.textContent = err.detail || '登录失败';
+      errorEl.style.display = 'block';
+      return;
+    }
+    const data = await res.json();
+    state.token = data.token;
+    state.currentUser = data.user;
+    localStorage.setItem('jarvis_token', data.token);
+    localStorage.setItem('jarvis_user', JSON.stringify(data.user));
+    showMainApp();
+  } catch (e) {
+    errorEl.textContent = '网络错误，请重试';
+    errorEl.style.display = 'block';
+  }
+}
+
+async function doRegister() {
+  const username = document.getElementById('reg-username').value.trim();
+  const name = document.getElementById('reg-name').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const errorEl = document.getElementById('reg-error');
+  errorEl.style.display = 'none';
+
+  if (!username || !password) { errorEl.textContent = '请填写必填字段'; errorEl.style.display = 'block'; return; }
+
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, name: name || username }),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      errorEl.textContent = err.detail || '注册失败';
+      errorEl.style.display = 'block';
+      return;
+    }
+    const data = await res.json();
+    state.token = data.token;
+    state.currentUser = data.user;
+    localStorage.setItem('jarvis_token', data.token);
+    localStorage.setItem('jarvis_user', JSON.stringify(data.user));
+    showMainApp();
+    showToast('注册成功！', 'success');
+  } catch (e) {
+    errorEl.textContent = '网络错误，请重试';
+    errorEl.style.display = 'block';
+  }
+}
+
+function doLogout() {
+  state.token = null;
+  state.currentUser = null;
+  localStorage.removeItem('jarvis_token');
+  localStorage.removeItem('jarvis_user');
+  if (state.ws) { state.ws.close(); state.ws = null; }
+  showAuthPage();
+}
+
+function authHeaders() {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.token) headers['Authorization'] = `Bearer ${state.token}`;
+  return headers;
+}
 
 // ==================== Navigation ====================
 function initNav() {
@@ -34,38 +146,29 @@ function initNav() {
   });
 }
 
-function initUserSelect() {
-  const select = document.getElementById('viewer-select');
-  const users = ['alice', 'bob', 'charlie', 'diana'];
-  users.forEach(u => {
-    const opt = document.createElement('option');
-    opt.value = u;
-    opt.textContent = u.charAt(0).toUpperCase() + u.slice(1);
-    select.appendChild(opt);
-  });
-  select.value = state.currentUser;
-  select.addEventListener('change', e => {
-    state.currentUser = e.target.value;
-    loadChats();
-  });
-}
-
 // ==================== WebSocket ====================
 function connectWebSocket() {
-  state.ws = new WebSocket(`${WS_BASE}/ws`);
+  const url = state.token ? `${WS_BASE}/ws?token=${state.token}` : `${WS_BASE}/ws`;
+  state.ws = new WebSocket(url);
   state.ws.onmessage = (event) => {
     const msg = JSON.parse(event.data);
     handleWsMessage(msg);
   };
   state.ws.onclose = () => {
-    setTimeout(connectWebSocket, 2000);
+    setTimeout(connectWebSocket, 3000);
   };
+  state.ws.onerror = () => {};
 }
 
 function handleWsMessage(msg) {
   switch (msg.type) {
     case 'new_message':
       handleNewMessage(msg.data);
+      break;
+    case 'message_recalled':
+      if (msg.data.chat_id === state.activeChat) {
+        loadMessages(state.activeChat);
+      }
       break;
     case 'task_progress':
       handleTaskProgress(msg.data);
@@ -77,6 +180,15 @@ function handleWsMessage(msg) {
       break;
     case 'presentation_updated':
       loadPresentations();
+      break;
+    case 'friend_request':
+      loadFriendRequests();
+      showToast('收到新的好友请求！');
+      break;
+    case 'friend_accepted':
+      loadFriends();
+      loadChats();
+      showToast(`${msg.data.user_name || '好友'} 接受了你的好友请求！`, 'success');
       break;
   }
 }
@@ -100,7 +212,7 @@ function handleTaskProgress(data) {
 // ==================== IM - Chats ====================
 async function loadChats() {
   try {
-    const res = await fetch(`${API_BASE}/api/chats?user_id=${state.currentUser}`);
+    const res = await fetch(`${API_BASE}/api/chats`, { headers: authHeaders() });
     state.chats = await res.json();
     renderChats();
   } catch (e) {
@@ -114,21 +226,23 @@ function renderChats() {
   state.chats.forEach(chat => {
     const item = document.createElement('div');
     item.className = `conversation-item${chat.id === state.activeChat ? ' active' : ''}`;
-    const initial = (chat.name || '?').charAt(0);
-    const isAgent = chat.name === 'JarvisAgent';
+    const displayName = chat.display_name || chat.name || '?';
+    const initial = displayName.charAt(0);
+    const isAgent = displayName === 'JarvisAgent';
     const preview = chat.last_message ? chat.last_message.content.slice(0, 30) : '';
     const time = chat.last_message ? formatTime(chat.last_message.created_at) : '';
     item.innerHTML = `
       <div class="avatar${isAgent ? ' agent-avatar' : ''}">${isAgent ? '🤖' : initial}</div>
       <div class="conv-info">
-        <span class="conv-name">${chat.name || chat.id}</span>
+        <span class="conv-name">${escapeHtml(displayName)}</span>
         <span class="conv-preview">${escapeHtml(preview)}</span>
       </div>
       <div class="conv-meta">
         <span class="conv-time">${time}</span>
+        ${chat.unread_count > 0 ? `<span class="conv-badge">${chat.unread_count}</span>` : ''}
       </div>
     `;
-    item.addEventListener('click', () => openChat(chat.id, chat.name));
+    item.addEventListener('click', () => openChat(chat.id, displayName));
     list.appendChild(item);
   });
 }
@@ -144,7 +258,7 @@ async function openChat(chatId, chatName) {
 // ==================== IM - Messages ====================
 async function loadMessages(chatId) {
   try {
-    const res = await fetch(`${API_BASE}/api/chats/${chatId}/messages`);
+    const res = await fetch(`${API_BASE}/api/chats/${chatId}/messages`, { headers: authHeaders() });
     state.messages = await res.json();
     renderMessages();
     scrollToBottom();
@@ -161,7 +275,7 @@ function renderMessages() {
     return;
   }
   state.messages.forEach(msg => {
-    const isSelf = msg.sender_id === state.currentUser;
+    const isSelf = msg.sender_id === state.currentUser.id;
     const isAgent = msg.sender_id === 'agent';
     const div = document.createElement('div');
     div.className = `message${isSelf ? ' self' : ''}${isAgent ? ' agent' : ''}`;
@@ -179,7 +293,7 @@ function renderMessages() {
     div.innerHTML = `
       <div class="${avatarClass}">${avatarText}</div>
       <div class="message-content">
-        ${!isSelf ? `<div class="message-sender">${msg.sender_id}</div>` : ''}
+        ${!isSelf ? `<div class="message-sender">${escapeHtml(msg.sender_id)}</div>` : ''}
         ${bodyHtml}
         <div class="message-time">${formatTime(msg.created_at)}</div>
       </div>
@@ -206,7 +320,7 @@ function renderAgentCard(msg) {
     if (card.results && card.results.artifacts) {
       extra = card.results.artifacts.map(art => {
         const viewName = art.type === 'document' ? '文档' : '演示稿';
-        return `<span class="artifact-link" onclick="viewArtifact('${art.type}','${art.id}')"">查看${viewName}: ${art.title}</span>`;
+        return `<span class="artifact-link" onclick="viewArtifact('${art.type}','${art.id}')">查看${viewName}: ${escapeHtml(art.title)}</span>`;
       }).join(' ');
     }
   } else if (card.type === 'clarification') {
@@ -234,18 +348,19 @@ function renderAgentCard(msg) {
 
 function viewArtifact(type, id) {
   if (type === 'document') {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelector('[data-view="documents"]').classList.add('active');
-    document.getElementById('view-documents').classList.add('active');
+    switchView('documents');
     loadDocumentContent(id);
   } else if (type === 'presentation') {
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelector('[data-view="slides"]').classList.add('active');
-    document.getElementById('view-slides').classList.add('active');
+    switchView('slides');
     loadSlidesContent(id);
   }
+}
+
+function switchView(viewName) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelector(`[data-view="${viewName}"]`).classList.add('active');
+  document.getElementById(`view-${viewName}`).classList.add('active');
 }
 
 // ==================== Composer ====================
@@ -271,34 +386,202 @@ function initComposer() {
 
 async function sendMessage(content) {
   try {
-    await fetch(`${API_BASE}/api/chats/${state.activeChat}/messages?user_id=${state.currentUser}`, {
+    await fetch(`${API_BASE}/api/chats/${state.activeChat}/messages`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: authHeaders(),
       body: JSON.stringify({ content, msg_type: 'text' }),
     });
 
-    const isAgentChat = state.chats.find(c => c.id === state.activeChat)?.name === 'JarvisAgent';
-    const hasCommand = /帮我|生成|创建|写一|做一|总结|整理/.test(content);
+    // Check if should trigger agent
+    const chatInfo = state.chats.find(c => c.id === state.activeChat);
+    const isAgentChat = chatInfo && (chatInfo.display_name === 'JarvisAgent' || chatInfo.name === 'JarvisAgent');
+    const hasCommand = /帮我|生成|创建|写一|做一|总结|整理|修改|改一下|分享|发给/.test(content);
     if (isAgentChat || hasCommand) {
       await fetch(`${API_BASE}/api/agent/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders(),
         body: JSON.stringify({
           message: content,
           chat_id: state.activeChat,
-          user_id: state.currentUser,
+          user_id: state.currentUser.id,
         }),
       });
     }
   } catch (e) {
     console.error('Failed to send message:', e);
+    showToast('发送失败，请重试', 'error');
+  }
+}
+
+// ==================== Friends ====================
+async function loadFriends() {
+  try {
+    const res = await fetch(`${API_BASE}/api/friends`, { headers: authHeaders() });
+    state.friends = await res.json();
+    renderFriendsList();
+  } catch (e) {
+    console.error('Failed to load friends:', e);
+  }
+}
+
+function renderFriendsList() {
+  const list = document.getElementById('friends-list');
+  list.innerHTML = '';
+  if (state.friends.length === 0) {
+    list.innerHTML = '<div style="padding:20px;color:var(--text-secondary);font-size:13px;">暂无好友。在右侧搜索添加好友。</div>';
+    return;
+  }
+  state.friends.forEach(friend => {
+    const item = document.createElement('div');
+    item.className = 'friend-item';
+    item.innerHTML = `
+      <div class="avatar">${friend.name.charAt(0)}</div>
+      <div class="conv-info">
+        <span class="conv-name">${escapeHtml(friend.name)}</span>
+        <span class="conv-preview">@${escapeHtml(friend.id)}</span>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+async function loadFriendRequests() {
+  try {
+    const res = await fetch(`${API_BASE}/api/friends/requests`, { headers: authHeaders() });
+    const data = await res.json();
+    renderFriendRequests(data);
+  } catch (e) {
+    console.error('Failed to load friend requests:', e);
+  }
+}
+
+function renderFriendRequests(data) {
+  const container = document.getElementById('friend-requests');
+  container.innerHTML = '';
+
+  if (data.incoming.length === 0 && data.outgoing.length === 0) {
+    container.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;">暂无好友请求</div>';
+    return;
+  }
+
+  data.incoming.forEach(req => {
+    const div = document.createElement('div');
+    div.className = 'friend-request-item';
+    div.innerHTML = `
+      <div class="avatar">${(req.from_name || req.from_user_id).charAt(0)}</div>
+      <div class="conv-info">
+        <span class="conv-name">${escapeHtml(req.from_name || req.from_user_id)}</span>
+        <span class="conv-preview">请求添加你为好友</span>
+      </div>
+      <div class="actions">
+        <button class="btn-accept" onclick="acceptFriend('${req.id}')">接受</button>
+        <button class="btn-reject" onclick="rejectFriend('${req.id}')">拒绝</button>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  data.outgoing.forEach(req => {
+    const div = document.createElement('div');
+    div.className = 'friend-request-item';
+    div.innerHTML = `
+      <div class="avatar">${(req.to_name || req.to_user_id).charAt(0)}</div>
+      <div class="conv-info">
+        <span class="conv-name">${escapeHtml(req.to_name || req.to_user_id)}</span>
+        <span class="conv-preview">等待对方接受</span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+async function searchAndAddFriend() {
+  const input = document.getElementById('add-friend-input');
+  const q = input.value.trim();
+  if (!q) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/users/search?q=${encodeURIComponent(q)}`, { headers: authHeaders() });
+    const users = await res.json();
+    const container = document.getElementById('search-results');
+    container.innerHTML = '';
+
+    if (users.length === 0) {
+      container.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;padding:8px 0;">未找到用户</div>';
+      return;
+    }
+
+    users.forEach(user => {
+      const div = document.createElement('div');
+      div.className = 'friend-request-item';
+      div.innerHTML = `
+        <div class="avatar">${user.name.charAt(0)}</div>
+        <div class="conv-info">
+          <span class="conv-name">${escapeHtml(user.name)}</span>
+          <span class="conv-preview">@${escapeHtml(user.id)}</span>
+        </div>
+        <div class="actions">
+          <button class="btn-accept" onclick="sendFriendRequest('${user.id}')">添加</button>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  } catch (e) {
+    showToast('搜索失败', 'error');
+  }
+}
+
+async function sendFriendRequest(targetId) {
+  try {
+    const res = await fetch(`${API_BASE}/api/friends/request?target_user_id=${targetId}`, {
+      method: 'POST',
+      headers: authHeaders(),
+    });
+    if (res.ok) {
+      showToast('好友请求已发送！', 'success');
+      loadFriendRequests();
+    } else {
+      const err = await res.json();
+      showToast(err.detail || '发送失败', 'error');
+    }
+  } catch (e) {
+    showToast('网络错误', 'error');
+  }
+}
+
+async function acceptFriend(friendshipId) {
+  try {
+    const res = await fetch(`${API_BASE}/api/friends/accept/${friendshipId}`, {
+      method: 'POST',
+      headers: authHeaders(),
+    });
+    if (res.ok) {
+      showToast('已接受好友请求', 'success');
+      loadFriends();
+      loadFriendRequests();
+      loadChats();
+    }
+  } catch (e) {
+    showToast('操作失败', 'error');
+  }
+}
+
+async function rejectFriend(friendshipId) {
+  try {
+    await fetch(`${API_BASE}/api/friends/reject/${friendshipId}`, {
+      method: 'POST',
+      headers: authHeaders(),
+    });
+    loadFriendRequests();
+  } catch (e) {
+    showToast('操作失败', 'error');
   }
 }
 
 // ==================== Documents ====================
 async function loadDocuments() {
   try {
-    const res = await fetch(`${API_BASE}/api/documents`);
+    const res = await fetch(`${API_BASE}/api/documents`, { headers: authHeaders() });
     state.documents = await res.json();
     renderDocumentList();
   } catch (e) {
@@ -330,12 +613,19 @@ function renderDocumentList() {
 
 async function loadDocumentContent(docId) {
   try {
-    const res = await fetch(`${API_BASE}/api/documents/${docId}`);
+    const res = await fetch(`${API_BASE}/api/documents/${docId}`, { headers: authHeaders() });
     const doc = await res.json();
     const container = document.getElementById('doc-content');
-    container.innerHTML = renderMarkdown(doc.content || `# ${doc.title}\n\n文档内容加载中...`);
-
-    document.querySelectorAll('.doc-item').forEach(el => el.classList.remove('active'));
+    container.innerHTML = `
+      <div class="doc-toolbar">
+        <h2>${escapeHtml(doc.title)}</h2>
+        <div class="export-btns">
+          <button onclick="exportDocument('${docId}','md')" title="导出 Markdown">📥 MD</button>
+          <button onclick="exportDocument('${docId}','html')" title="导出 HTML">📥 HTML</button>
+        </div>
+      </div>
+      <div class="doc-body">${renderMarkdown(doc.content || '文档内容加载中...')}</div>
+    `;
   } catch (e) {
     console.error('Failed to load document:', e);
   }
@@ -344,7 +634,7 @@ async function loadDocumentContent(docId) {
 // ==================== Presentations ====================
 async function loadPresentations() {
   try {
-    const res = await fetch(`${API_BASE}/api/presentations`);
+    const res = await fetch(`${API_BASE}/api/presentations`, { headers: authHeaders() });
     state.presentations = await res.json();
     renderSlidesList();
   } catch (e) {
@@ -377,7 +667,7 @@ function renderSlidesList() {
 
 async function loadSlidesContent(presId) {
   try {
-    const res = await fetch(`${API_BASE}/api/presentations/${presId}`);
+    const res = await fetch(`${API_BASE}/api/presentations/${presId}`, { headers: authHeaders() });
     const pres = await res.json();
     const slides = typeof pres.slides === 'string' ? JSON.parse(pres.slides) : (pres.slides || []);
     const container = document.getElementById('slides-content');
@@ -387,6 +677,17 @@ async function loadSlidesContent(presId) {
       container.innerHTML = '<div class="empty-state">演示稿暂无内容</div>';
       return;
     }
+
+    const toolbar = document.createElement('div');
+    toolbar.className = 'doc-toolbar';
+    toolbar.innerHTML = `
+      <h2>${escapeHtml(pres.title)}</h2>
+      <div class="export-btns">
+        <button onclick="exportPresentation('${presId}','json')" title="导出 JSON">📥 JSON</button>
+        <button onclick="exportPresentation('${presId}','html')" title="导出 HTML">📥 HTML</button>
+      </div>
+    `;
+    container.appendChild(toolbar);
 
     slides.forEach((slide, idx) => {
       const el = document.createElement('div');
@@ -476,4 +777,95 @@ function renderMarkdown(md) {
 function scrollToBottom() {
   const list = document.getElementById('message-list');
   setTimeout(() => { list.scrollTop = list.scrollHeight; }, 50);
+}
+
+function showToast(message, type = '') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ==================== Voice Input (Web Speech API) ====================
+function initVoiceInput() {
+  const voiceBtn = document.getElementById('voice-btn');
+  if (!voiceBtn) return;
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    voiceBtn.style.display = 'none';
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'zh-CN';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  let isListening = false;
+
+  voiceBtn.addEventListener('click', () => {
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    isListening = true;
+    voiceBtn.classList.add('listening');
+    voiceBtn.textContent = '⏹️';
+    recognition.start();
+  });
+
+  recognition.onresult = (event) => {
+    const text = event.results[0][0].transcript;
+    const input = document.getElementById('message-input');
+    input.value = text;
+    input.focus();
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    voiceBtn.classList.remove('listening');
+    voiceBtn.textContent = '🎤';
+  };
+
+  recognition.onerror = () => {
+    isListening = false;
+    voiceBtn.classList.remove('listening');
+    voiceBtn.textContent = '🎤';
+  };
+}
+
+// ==================== Export Functions ====================
+async function exportDocument(docId, format) {
+  try {
+    const res = await fetch(`${API_BASE}/api/documents/${docId}/export?format=${format}`, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Export failed');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `document.${format === 'html' ? 'html' : 'md'}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('导出成功', 'success');
+  } catch (e) {
+    showToast('导出失败', 'error');
+  }
+}
+
+async function exportPresentation(presId, format) {
+  try {
+    const res = await fetch(`${API_BASE}/api/presentations/${presId}/export?format=${format}`, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Export failed');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `presentation.${format === 'html' ? 'html' : 'json'}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('导出成功', 'success');
+  } catch (e) {
+    showToast('导出失败', 'error');
+  }
 }

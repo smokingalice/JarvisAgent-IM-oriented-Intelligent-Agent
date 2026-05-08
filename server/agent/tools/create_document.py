@@ -2,8 +2,9 @@ import uuid
 import json
 from datetime import datetime
 from anthropic import AsyncAnthropic
-from config import ANTHROPIC_API_KEY
+from config import ANTHROPIC_API_KEY, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL
 from database import get_db
+from ws_manager import manager
 
 DOC_SYSTEM_PROMPT = """你是一个专业的文档撰写者。根据用户的需求生成结构化的文档内容。
 
@@ -26,15 +27,20 @@ async def create_document_tool(params: dict, chat_id: str = "") -> dict:
     content = await _generate_document_content(title, outline, tone, source_message)
 
     doc_id = f"doc_{uuid.uuid4().hex[:12]}"
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
     db = await get_db()
     await db.execute("""
         INSERT INTO documents (id, title, content, outline, status, created_by, created_at, updated_at)
-        VALUES (?, ?, ?, ?, 'draft', 'agent', ?, ?)
+        VALUES (%s, %s, %s, %s, 'draft', 'agent', %s, %s)
     """, (doc_id, title, content, json.dumps(outline, ensure_ascii=False), now, now))
     await db.commit()
     await db.close()
+
+    await manager.broadcast({
+        "type": "document_updated",
+        "data": {"id": doc_id, "title": title},
+    })
 
     return {
         "document_id": doc_id,
@@ -52,7 +58,7 @@ async def _generate_document_content(title: str, outline: list, tone: str, sourc
         return _fallback_content(title, outline)
 
     try:
-        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY)
+        client = AsyncAnthropic(api_key=ANTHROPIC_API_KEY, base_url=ANTHROPIC_BASE_URL)
 
         tone_desc = {"formal": "正式专业", "casual": "轻松口语化", "technical": "技术文档风格"}.get(tone, "正式专业")
 
@@ -66,7 +72,7 @@ async def _generate_document_content(title: str, outline: list, tone: str, sourc
 请按照大纲逐章节撰写完整内容。"""
 
         response = await client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model=ANTHROPIC_MODEL,
             max_tokens=4096,
             system=DOC_SYSTEM_PROMPT,
             messages=[{"role": "user", "content": prompt}],

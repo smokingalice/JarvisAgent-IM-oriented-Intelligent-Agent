@@ -16,12 +16,12 @@ orchestrator = AgentOrchestrator()
 async def agent_chat(req: AgentRequest, background_tasks: BackgroundTasks):
     """Submit a message to the Agent. Triggers intent parsing and task execution."""
     task_id = f"task_{uuid.uuid4().hex[:12]}"
-    now = datetime.utcnow().isoformat()
+    now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
     db = await get_db()
     await db.execute("""
         INSERT INTO tasks (id, chat_id, user_id, status, created_at, updated_at)
-        VALUES (?, ?, ?, 'processing', ?, ?)
+        VALUES (%s, %s, %s, 'processing', %s, %s)
     """, (task_id, req.chat_id, req.user_id, now, now))
     await db.commit()
     await db.close()
@@ -40,7 +40,7 @@ async def agent_chat(req: AgentRequest, background_tasks: BackgroundTasks):
 @router.get("/agent/tasks/{task_id}")
 async def get_task(task_id: str):
     db = await get_db()
-    cursor = await db.execute("SELECT * FROM tasks WHERE id = ?", (task_id,))
+    cursor = await db.execute("SELECT * FROM tasks WHERE id = %s", (task_id,))
     row = await cursor.fetchone()
     await db.close()
     if not row:
@@ -63,8 +63,8 @@ async def get_task(task_id: str):
 async def cancel_task(task_id: str):
     db = await get_db()
     await db.execute(
-        "UPDATE tasks SET status = 'cancelled', updated_at = ? WHERE id = ?",
-        (datetime.utcnow().isoformat(), task_id)
+        "UPDATE tasks SET status = 'cancelled', updated_at = %s WHERE id = %s",
+        (datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"), task_id)
     )
     await db.commit()
     await db.close()

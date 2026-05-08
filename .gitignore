@@ -6,3 +6,18 @@ __pycache__/
 .claude/
 node_modules/
 *.log
+
+# Flutter
+flutter_client/.dart_tool/
+flutter_client/build/
+flutter_client/.idea/
+flutter_client/android/.gradle/
+flutter_client/android/app/build/
+flutter_client/ios/Pods/
+flutter_client/ios/.symlinks/
+flutter_client/windows/flutter/ephemeral/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
